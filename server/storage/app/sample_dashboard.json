@@ -1,0 +1,64 @@
+{
+  "last_updated": "2026-03-03",
+  "global_chaos_probability_100_percent": {
+    "probability_from": 35,
+    "probability_to": 55,
+    "current_assessment": {
+      "en": "The probability of a systemic cascade has jumped significantly.",
+      "ru": "Вероятность системного каскада значительно возросла.",
+      "uk": "Імовірність системного каскаду значно зросла.",
+      "de": "Die Wahrscheinlichkeit einer systemischen Kaskade ist deutlich gestiegen.",
+      "lv": "Sistēmiskas kaskādes iespējamība ir ievērojami pieaugusi."
+    },
+    "triggers_to_watch": {
+      "en": ["Duration of the Strait of Hormuz closure", "Internal stability of Iran"],
+      "ru": ["Продолжительность закрытия Ормузского пролива", "Внутренняя стабильность Ирана"],
+      "uk": ["Тривалість закриття Ормузької протоки"],
+      "de": ["Dauer der Schließung der Straße von Hormus"],
+      "lv": ["Hormuza šauruma slēgšanas ilgums"]
+    }
+  },
+  "countries": [
+    {
+      "name": "USA",
+      "liquidity": 75,
+      "logistics": 82,
+      "legitimacy": 65,
+      "overall": 74.0,
+      "liquidity_history": {"0": 75, "1": 70, "5": 65, "10": 62},
+      "logistics_history": {"0": 82, "1": 75, "5": 70, "10": 68},
+      "legitimacy_history": {"0": 65, "1": 64, "5": 62, "10": 60},
+      "overall_history": {"0": 74.0, "1": 69.7, "5": 65.7, "10": 63.3},
+      "family_safety_note": {"en": "Expect rapid spikes in gasoline prices.", "ru": "Ожидайте резких скачков цен на бензин."}
+    },
+    {
+      "name": "Eurozone",
+      "liquidity": 85,
+      "logistics": 88,
+      "legitimacy": 60,
+      "overall": 77.7,
+      "liquidity_history": {"0": 85, "1": 80, "5": 75, "10": 70},
+      "logistics_history": {"0": 88, "1": 82, "5": 78, "10": 75},
+      "legitimacy_history": {"0": 60, "1": 58, "5": 58, "10": 58},
+      "overall_history": {"0": 77.7, "1": 73.3, "5": 70.3, "10": 67.7},
+      "family_safety_note": {"en": "Energy dependency puts EU at high risk.", "ru": "Энергетическая зависимость подвергает ЕС риску."}
+    }
+  ],
+  "scenarios": [
+    {"name": "optimistic", "description": {"en": "Rapid mediation. Oil stabilizes.", "ru": "Быстрое посредничество."}, "when_visible": "2026-03-15", "probability_percent": 15},
+    {"name": "realistic", "description": {"en": "Hormuz remains high-risk for 4-8 weeks.", "ru": "Ормуз остается зоной риска."}, "when_visible": "2026-05", "probability_percent": 55}
+  ],
+  "key_indicators_today": {
+    "gold_price": 5374.0,
+    "brent_crude": 79.5,
+    "vix_fear_index": 21.4,
+    "global_economic_policy_uncertainty_index": 415.0,
+    "gold_price_history": {"0": 5374.0, "1": 5306.0, "5": 5100.0, "10": 4950.0},
+    "brent_crude_history": {"0": 79.5, "1": 77.0, "5": 72.0, "10": 70.0},
+    "vix_history": {"0": 21.4, "1": 19.8, "5": 17.6, "10": 16.2},
+    "most_critical_shipping_chokepoint_status": {
+      "en": "Strait of Hormuz is effectively closed to major commercial carriers.",
+      "ru": "Ормузский пролив фактически закрыт для крупных перевозчиков."
+    }
+  }
+}

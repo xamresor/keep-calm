@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>No Panic, Keep calm, stay informed.</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#1c1c1c" />
+  <style>
+    :root {
+      --bg: #070b16;
+      --surface: #101827;
+      --surface-hover: #141f31;
+      --text: #f3f6ff;
+      --text-muted: #a8b2c7;
+      --subtitle-tint: #bcc9e4;
+      --text-disclaimer: #6c758b;
+      --accent: #f59e0b;
+      --accent-soft: rgba(254, 123, 2, 0.12);
+      --border: #1e2a40;
+      --danger: #ef4444;
+      --danger-soft: rgba(239, 68, 68, 0.15);
+      --warning: #f59e0b;
+      --success: #34d399;
+      --chart-from: #71717a;
+      --chart-to: #FE7B02;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: radial-gradient(circle at top, #0d1527 0%, var(--bg) 34%);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      color-scheme: dark;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 2.5rem;
+    }
+
+    /* Header – Calm Navigator style */
+    .header-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0 1.4rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    .header-left {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .site-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .site-title-wrap svg {
+      flex-shrink: 0;
+      color: var(--warning);
+    }
+
+    .site-title {
+      font-size: clamp(1.06rem, 2vw, 1.26rem);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      margin: 0;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .disclaimer {
+      color: var(--text-disclaimer);
+      font-size: 0.75rem;
+      margin: 0;
+      max-width: 680px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .header-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .lang-btns {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .lang-btns button {
+      padding: 0.2rem 0.46rem;
+      font-size: 0.62rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+
+    .lang-btns button:hover,
+    .lang-btns button.active {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--subtitle-tint);
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      margin: 0 0 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .title-with-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .title-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 13px;
+      height: 13px;
+      color: var(--accent);
+      opacity: 0.92;
+      flex-shrink: 0;
+    }
+
+    .title-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Chaos – circular gauge + assessment */
+    .chaos-section {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.8rem;
+      align-items: start;
+      margin-bottom: 1.2rem;
+    }
+
+    @media (max-width: 640px) {
+      .chaos-section { grid-template-columns: 1fr; }
+    }
+
+    .chaos-gauge-wrap {
+      flex-shrink: 0;
+      position: relative;
+      width: 190px;
+      height: 190px;
+      margin: 0 auto;
+    }
+
+    .chaos-gauge-bg {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: conic-gradient(var(--border) 0deg, var(--border) 360deg);
+    }
+
+    .chaos-gauge-arc {
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      background: conic-gradient(
+        transparent 0deg,
+        var(--accent) calc(var(--from-pct) * 3.6deg),
+        var(--accent) calc(var(--to-pct) * 3.6deg),
+        transparent calc(var(--to-pct) * 3.6deg)
+      );
+    }
+
+    .chaos-gauge-inner {
+      position: absolute;
+      inset: 27px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #0b1220 0%, #09101d 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chaos-gauge-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.93rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .chaos-gauge-label {
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .chaos-content {
+      background: transparent;
+      border: 0;
+      padding: 0.2rem 0 0;
+      margin: 0;
+    }
+
+    .chaos-content .card-title { margin-bottom: 0.62rem; }
+
+    .assessment {
+      color: #d8dfef;
+      font-size: 0.9375rem;
+      margin: 0 0 1rem;
+      line-height: 1.55;
+    }
+
+    .triggers-list {
+      counter-reset: trigger-index;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .triggers-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.86rem;
+      color: #d5dced;
+      background: #0f1726;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 0.58rem 0.8rem;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .trigger-index {
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      flex-shrink: 0;
+      opacity: 0.9;
+    }
+
+    /* Key indicators – value + trend + chart */
+    .indicators-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 1.55rem;
+    }
+
+    .indicator-card {
+      background: linear-gradient(180deg, #0f1728 0%, #0d1524 100%);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.95rem 1rem;
+    }
+
+    .indicator-card .label {
+      font-size: 0.64rem;
+      color: var(--subtitle-tint);
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      margin-bottom: 0.35rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .indicator-card .value-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .indicator-card .value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.52rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .indicator-trend {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .indicator-trend.up { color: var(--accent); }
+    .indicator-trend.down { color: var(--success); }
+
+    .indicator-card .chart-wrap {
+      height: 52px;
+      margin-top: 0.6rem;
+    }
+
+    /* Countries – list / compact */
+    .section-title {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--subtitle-tint);
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      margin: 1.6rem 0 0.7rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .countries-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.58rem;
+    }
+
+    .country-card {
+      background: linear-gradient(180deg, #0f1727 0%, #0d1523 100%);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem 0.85rem;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .country-card:hover {
+      background: var(--surface-hover);
+      border-color: #2f4263;
+      box-shadow: 0 0 0 1px rgba(47, 66, 99, 0.25) inset;
+    }
+
+    .country-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      cursor: pointer;
+    }
+
+    .country-left {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      min-width: 0;
+    }
+
+    .country-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #ef4444;
+      flex-shrink: 0;
+    }
+
+    .country-name {
+      font-weight: 600;
+      font-size: 0.98rem;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .country-metrics {
+      display: flex;
+      gap: 0.55rem;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      margin: 0;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .country-metrics span {
+      white-space: nowrap;
+      padding: 0.12rem 0.35rem;
+      border-radius: 999px;
+      background: #101d30;
+      border: 1px solid #22344f;
+    }
+
+    .country-overall {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .country-expand {
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.84rem;
+      margin-left: 0.45rem;
+    }
+
+    .country-detail {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      margin-top: 0.8rem;
+      border-top: 0 solid #1f304a;
+      padding-top: 0;
+      transition: max-height 0.24s ease, opacity 0.18s ease, padding-top 0.24s ease, border-width 0.24s ease;
+    }
+
+    .country-card.expanded .country-detail {
+      max-height: 480px;
+      opacity: 1;
+      border-top-width: 1px;
+      padding-top: 0.8rem;
+    }
+
+    .country-bars {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin-bottom: 0.58rem;
+    }
+
+    .country-bar-label {
+      color: var(--text-muted);
+      font-size: 0.61rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.22rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .country-bar-track {
+      height: 8px;
+      border-radius: 99px;
+      overflow: hidden;
+      background: #0a1220;
+      border: 1px solid #21314b;
+    }
+
+    .country-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #5b626d 0%, #f59e0b 100%);
+      width: 0;
+    }
+
+    .country-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.45rem;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+      line-height: 1.45;
+    }
+
+    .country-note-icon {
+      width: 13px;
+      height: 13px;
+      color: #7fd7b4;
+      opacity: 0.95;
+      flex-shrink: 0;
+      margin-top: 0.08rem;
+    }
+
+    .country-note-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .country-card .chart-wrap {
+      height: 44px;
+      margin: 0.5rem 0 0;
+    }
+
+    /* Scenarios */
+    .scenarios-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    @media (max-width: 940px) {
+      .scenarios-list { grid-template-columns: 1fr; }
+    }
+
+    .scenario-card {
+      background: linear-gradient(180deg, #0f1728 0%, #0d1524 100%);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      min-height: 178px;
+    }
+
+    .scenario-card.optimistic { border-color: rgba(52, 211, 153, 0.28); }
+    .scenario-card.realistic { border-color: rgba(245, 158, 11, 0.3); }
+    .scenario-card.pessimistic { border-color: rgba(239, 68, 68, 0.33); }
+
+    .scenario-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0.16rem 0.45rem;
+      font-size: 0.61rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      border: 1px solid transparent;
+    }
+
+    .scenario-badge.optimistic { color: #66e7b7; background: rgba(52, 211, 153, 0.12); border-color: rgba(52, 211, 153, 0.25); }
+    .scenario-badge.realistic { color: #f6b94e; background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.27); }
+    .scenario-badge.pessimistic { color: #fd7f7f; background: rgba(239, 68, 68, 0.12); border-color: rgba(239, 68, 68, 0.28); }
+
+    .scenario-prob {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: #e7edf9;
+    }
+
+    .scenario-when {
+      font-size: 0.7rem;
+      color: var(--text-disclaimer);
+      margin-top: 0.4rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .scenario-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .scenario-desc {
+      font-size: 0.89rem;
+      color: #d8e0f1;
+      line-height: 1.45;
+    }
+
+    /* Shipping chokepoint – red alert */
+    .chokepoint-card {
+      background: linear-gradient(180deg, rgba(127, 24, 24, 0.45) 0%, rgba(106, 23, 23, 0.35) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-radius: 10px;
+      padding: 0.82rem 1rem;
+      margin-top: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .chokepoint-card .card-title {
+      color: var(--danger);
+      margin-bottom: 0.5rem;
+    }
+
+    .chokepoint-text {
+      font-size: 0.91rem;
+      color: #ffe4e4;
+    }
+
+    /* Loading & error */
+    .loading, .error {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-muted);
+    }
+
+    .error { color: var(--danger); }
+
+    .updated-at {
+      font-size: 0.75rem;
+      color: var(--text-disclaimer);
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    @media (max-width: 780px) {
+      .country-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .country-metrics {
+        justify-content: flex-start;
+      }
+
+      .country-bars {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header-row" id="header-row">
+      <div class="header-left">
+        <div class="site-title-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <h1 class="site-title" id="site-title-text">No Panic. Keep calm, stay informed.</h1>
+        </div>
+        <p class="disclaimer" id="site-subtitle-text">Information is generated by AI. Evaluate on your own risk. Not financial advice. Numbers can differ from real world.</p>
+      </div>
+      <div class="header-meta">
+        <span class="header-date" id="header-date"></span>
+        <div class="lang-btns" aria-label="Language">
+          <button type="button" data-lang="en" class="active">EN</button>
+          <button type="button" data-lang="ru">RU</button>
+          <button type="button" data-lang="uk">UA</button>
+          <button type="button" data-lang="de">DE</button>
+          <button type="button" data-lang="lv">LV</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="app">
+      <div class="loading" id="loading">Loading dashboard…</div>
+      <div class="error" id="error" style="display: none;"></div>
+      <div id="content" style="display: none;"></div>
+    </main>
+  </div>
+
+  <script>
+    let LANG = 'en';
+    let lastData = null;
+    const UI_COPY = {
+      en: {
+        pageTitle: 'No Panic, Keep calm, stay informed.',
+        title: 'No Panic. Keep calm, stay informed.',
+        subtitle: 'Information is generated by AI. Evaluate on your own risk. Not financial advice. Numbers can differ from real world.',
+        loading: 'Loading dashboard…',
+        sections: {
+          globalAssessment: 'Global assessment',
+          chaosRisk: 'Chaos risk',
+          triggersToWatch: 'Triggers to watch',
+          shippingChokepoint: 'Critical shipping chokepoint',
+          keyIndicators: 'Key indicators',
+          countries: 'Country risk index',
+          scenarios: 'Scenarios',
+          lastUpdated: 'Last updated',
+        },
+        metrics: { liq: 'Liq', log: 'Log', leg: 'Leg', overall: 'Overall' },
+        indicators: {
+          gold: 'Gold',
+          brent: 'Brent Crude',
+          vix: 'VIX Fear Index',
+          policy: 'Policy Uncertainty',
+        },
+        time: { today: 'Today', daysAgo: 'd ago' },
+        errors: {
+          noData: 'No dashboard data. Run: php artisan dashboard:ingest',
+          failedLoad: 'Failed to load dashboard',
+        },
+      },
+      ru: {
+        pageTitle: 'Без паники — сохраняйте спокойствие.',
+        title: 'Без паники. Сохраняйте спокойствие, будьте в курсе.',
+        subtitle: 'Информация сгенерирована ИИ. Оценивайте на свой риск. Это не финансовый совет. Числа могут отличаться от реального мира.',
+        loading: 'Загрузка дашборда…',
+        sections: {
+          globalAssessment: 'Глобальная оценка',
+          chaosRisk: 'Риск хаоса',
+          triggersToWatch: 'Триггеры для наблюдения',
+          shippingChokepoint: 'Критическое транспортное узкое место',
+          keyIndicators: 'Ключевые индикаторы',
+          countries: 'Индекс странового риска',
+          scenarios: 'Сценарии',
+          lastUpdated: 'Обновлено',
+        },
+        metrics: { liq: 'Ликв', log: 'Лог', leg: 'Лег', overall: 'Итог' },
+        indicators: {
+          gold: 'Золото',
+          brent: 'Brent',
+          vix: 'Индекс страха VIX',
+          policy: 'Неопределенность политики',
+        },
+        time: { today: 'Сегодня', daysAgo: 'дн. назад' },
+        errors: {
+          noData: 'Нет данных дашборда. Запустите: php artisan dashboard:ingest',
+          failedLoad: 'Не удалось загрузить дашборд',
+        },
+      },
+      uk: {
+        pageTitle: 'Без паніки — зберігайте спокій.',
+        title: 'Без паніки. Зберігайте спокій, будьте поінформовані.',
+        subtitle: 'Інформацію згенеровано ШІ. Оцінюйте на власний ризик. Це не фінансова порада. Числа можуть відрізнятися від реального світу.',
+        loading: 'Завантаження дашборду…',
+        sections: {
+          globalAssessment: 'Глобальна оцінка',
+          chaosRisk: 'Ризик хаосу',
+          triggersToWatch: 'Тригери для спостереження',
+          shippingChokepoint: 'Критичне транспортне вузьке місце',
+          keyIndicators: 'Ключові індикатори',
+          countries: 'Індекс ризику країн',
+          scenarios: 'Сценарії',
+          lastUpdated: 'Оновлено',
+        },
+        metrics: { liq: 'Лікв', log: 'Лог', leg: 'Лег', overall: 'Заг.' },
+        indicators: {
+          gold: 'Золото',
+          brent: 'Brent',
+          vix: 'Індекс страху VIX',
+          policy: 'Невизначеність політики',
+        },
+        time: { today: 'Сьогодні', daysAgo: 'дн. тому' },
+        errors: {
+          noData: 'Немає даних дашборду. Запустіть: php artisan dashboard:ingest',
+          failedLoad: 'Не вдалося завантажити дашборд',
+        },
+      },
+      de: {
+        pageTitle: 'Keine Panik — ruhig bleiben.',
+        title: 'Keine Panik. Ruhig bleiben, informiert bleiben.',
+        subtitle: 'Die Informationen werden von KI generiert. Bewertung auf eigenes Risiko. Keine Finanzberatung. Zahlen können von der Realität abweichen.',
+        loading: 'Dashboard wird geladen…',
+        sections: {
+          globalAssessment: 'Globale Einschätzung',
+          chaosRisk: 'Chaosrisiko',
+          triggersToWatch: 'Zu beobachtende Trigger',
+          shippingChokepoint: 'Kritischer Transport-Engpass',
+          keyIndicators: 'Schlüsselindikatoren',
+          countries: 'Länderrisikoindex',
+          scenarios: 'Szenarien',
+          lastUpdated: 'Zuletzt aktualisiert',
+        },
+        metrics: { liq: 'Liq', log: 'Log', leg: 'Leg', overall: 'Gesamt' },
+        indicators: {
+          gold: 'Gold',
+          brent: 'Brent-Rohöl',
+          vix: 'VIX Angstindex',
+          policy: 'Politik-Unsicherheit',
+        },
+        time: { today: 'Heute', daysAgo: 'Tg. zuvor' },
+        errors: {
+          noData: 'Keine Dashboard-Daten. Ausführen: php artisan dashboard:ingest',
+          failedLoad: 'Dashboard konnte nicht geladen werden',
+        },
+      },
+      lv: {
+        pageTitle: 'Bez panikas — saglabā mieru.',
+        title: 'Bez panikas. Saglabā mieru, esi informēts.',
+        subtitle: 'Informāciju ģenerē MI. Izvērtē uz savu risku. Tas nav finanšu padoms. Skaitļi var atšķirties no reālās pasaules.',
+        loading: 'Ielādē paneli…',
+        sections: {
+          globalAssessment: 'Globālais novērtējums',
+          chaosRisk: 'Haosa risks',
+          triggersToWatch: 'Ko vērot',
+          shippingChokepoint: 'Kritiskais piegādes šaurais punkts',
+          keyIndicators: 'Galvenie rādītāji',
+          countries: 'Valstu riska indekss',
+          scenarios: 'Scenāriji',
+          lastUpdated: 'Atjaunināts',
+        },
+        metrics: { liq: 'Likv', log: 'Loģ', leg: 'Leģ', overall: 'Kopā' },
+        indicators: {
+          gold: 'Zelts',
+          brent: 'Brent nafta',
+          vix: 'VIX baiļu indekss',
+          policy: 'Politikas nenoteiktība',
+        },
+        time: { today: 'Šodien', daysAgo: 'd. atpakaļ' },
+        errors: {
+          noData: 'Nav paneļa datu. Palaidiet: php artisan dashboard:ingest',
+          failedLoad: 'Neizdevās ielādēt paneli',
+        },
+      },
+    };
+
+    const SECTION_ICONS = {
+      globalAssessment: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M3 12h18"></path>
+          <path d="M12 3a14 14 0 0 1 0 18"></path>
+          <path d="M12 3a14 14 0 0 0 0 18"></path>
+        </svg>
+      `,
+      triggersToWatch: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"></path>
+          <circle cx="12" cy="12" r="2"></circle>
+        </svg>
+      `,
+      keyIndicators: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 18h18"></path>
+          <path d="M6 14l4-4 3 3 5-6"></path>
+        </svg>
+      `,
+      countries: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"></path>
+          <path d="M9 4v14"></path>
+          <path d="M15 6v14"></path>
+        </svg>
+      `,
+      scenarios: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7l8-4 8 4-8 4-8-4z"></path>
+          <path d="M4 12l8 4 8-4"></path>
+          <path d="M4 17l8 4 8-4"></path>
+        </svg>
+      `,
+      shippingChokepoint: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10.3 3.9L2 18a2 2 0 0 0 1.7 3h16.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
+          <path d="M12 9v4"></path>
+          <path d="M12 17h.01"></path>
+        </svg>
+      `,
+    };
+
+    function withIcon(label, iconKey) {
+      const icon = SECTION_ICONS[iconKey] || '';
+      return `<span class="title-with-icon"><span class="title-icon">${icon}</span><span>${label}</span></span>`;
+    }
+
+    function ui() {
+      return UI_COPY[LANG] || UI_COPY.en;
+    }
+
+    function labelDaysAgo(days) {
+      if (days === 0) return ui().time.today;
+      return `${days}${ui().time.daysAgo}`;
+    }
+
+    function applyUiCopy() {
+      const copy = ui();
+      document.title = copy.pageTitle;
+      const titleEl = document.getElementById('site-title-text');
+      const subtitleEl = document.getElementById('site-subtitle-text');
+      const loadingEl = document.getElementById('loading');
+      if (titleEl) titleEl.textContent = copy.title;
+      if (subtitleEl) subtitleEl.textContent = copy.subtitle;
+      if (loadingEl) loadingEl.textContent = copy.loading;
+    }
+
+    function t(obj) {
+      if (obj == null) return '';
+      return typeof obj === 'string' ? obj : (obj[LANG] ?? obj['en'] ?? Object.values(obj)[0] ?? '');
+    }
+
+    function historyToSeries(history) {
+      if (!history || typeof history !== 'object') return { labels: [], values: [] };
+      const entries = Object.entries(history)
+        .filter(([k]) => /^\d+$/.test(k))
+        .map(([k, v]) => [parseInt(k, 10), Number(v)]);
+      // Older values on the left, today's value on the right.
+      entries.sort((a, b) => b[0] - a[0]);
+      const labels = entries.map(([d]) => labelDaysAgo(d));
+      const values = entries.map(([, v]) => v);
+      return { labels, values };
+    }
+
+    function createGradient(ctx, chartArea, fromGray = true) {
+      if (!chartArea) return 'rgba(254, 123, 2, 0.9)';
+      const gradient = ctx.createLinearGradient(chartArea.left, 0, chartArea.right, 0);
+      if (fromGray) {
+        gradient.addColorStop(0, 'rgba(113, 113, 122, 0.6)');
+        gradient.addColorStop(1, 'rgba(254, 123, 2, 0.95)');
+      } else {
+        gradient.addColorStop(0, 'rgba(254, 123, 2, 0.25)');
+        gradient.addColorStop(1, 'rgba(254, 123, 2, 0.02)');
+      }
+      return gradient;
+    }
+
+    function createMiniChart(canvasId, history, valueLabel, isPercentLike = false) {
+      const ctx = document.getElementById(canvasId)?.getContext('2d');
+      if (!ctx) return null;
+      const { labels, values } = historyToSeries(history);
+      if (values.length === 0) return null;
+
+      return new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            data: values,
+            borderColor: function(context) {
+              const chart = context.chart;
+              return createGradient(chart.ctx, chart.chartArea, true);
+            },
+            backgroundColor: function(context) {
+              const chart = context.chart;
+              return createGradient(chart.ctx, chart.chartArea, false);
+            },
+            fill: true,
+            tension: 0.3,
+            borderWidth: 2,
+            pointRadius: 2,
+            pointBackgroundColor: (ctx) => {
+              const idx = ctx.dataIndex;
+              const total = ctx.dataset.data.length;
+              const opacity = 0.5 + (0.5 * (idx / (total - 1 || 1)));
+              return `rgba(254, 123, 2, ${opacity})`;
+            },
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (item) => valueLabel + ': ' + (isPercentLike ? item.raw : item.raw.toLocaleString()),
+              },
+            },
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: '#71717a', maxRotation: 0, font: { size: 10 } },
+            },
+            y: {
+              grid: { color: 'rgba(255,255,255,0.06)' },
+              ticks: { color: '#71717a', font: { size: 10 } },
+            },
+          },
+        },
+      });
+    }
+
+    const chartInstances = [];
+
+    function trendFromHistory(history) {
+      if (!history || typeof history !== 'object') return null;
+      const cur = history['0'] != null ? Number(history['0']) : null;
+      const keys = Object.keys(history).filter(k => /^\d+$/.test(k)).map(Number).sort((a, b) => a - b);
+      const oldestKey = keys.find(k => k > 0);
+      const past = oldestKey != null ? Number(history[String(oldestKey)]) : null;
+      if (cur == null || past == null || past === 0) return null;
+      const pct = ((cur - past) / past) * 100;
+      return { pct, up: pct >= 0 };
+    }
+
+    function renderKeyIndicators(indicators) {
+      if (!indicators) return '';
+      const items = [
+        { key: 'gold_price', label: ui().indicators.gold, historyKey: 'gold_price_history', prefix: '$' },
+        { key: 'brent_crude', label: ui().indicators.brent, historyKey: 'brent_crude_history', prefix: '$' },
+        { key: 'vix_fear_index', label: ui().indicators.vix, historyKey: 'vix_history', prefix: '' },
+        { key: 'global_economic_policy_uncertainty_index', label: ui().indicators.policy, historyKey: null, prefix: '' },
+      ];
+      let html = `<h2 class="section-title">${withIcon(ui().sections.keyIndicators, 'keyIndicators')}</h2><div class="indicators-grid">`;
+      items.forEach((item, i) => {
+        const value = indicators[item.key];
+        const history = item.historyKey ? indicators[item.historyKey] : null;
+        const trend = trendFromHistory(history);
+        const valueStr = value != null ? (typeof value === 'number' && value > 100 ? value.toLocaleString() : value) : '—';
+        const id = 'chart-indicator-' + i;
+        const trendHtml = trend != null
+          ? `<span class="indicator-trend ${trend.up ? 'up' : 'down'}">${trend.up ? '▲' : '▼'} ${Math.abs(trend.pct).toFixed(1)}%</span>`
+          : '';
+        html += `
+          <div class="indicator-card">
+            <div class="label">${item.label}</div>
+            <div class="value-row">
+              <span class="value">${item.prefix}${valueStr}</span>
+              ${trendHtml}
+            </div>
+            ${history && Object.keys(history).length ? `<div class="chart-wrap"><canvas id="${id}"></canvas></div>` : ''}
+          </div>
+        `;
+      });
+      html += '</div>';
+      return html;
+    }
+
+    function renderCountries(countries) {
+      const list = (countries || []).filter(c => c.name && !c.name.includes('Duplicate'));
+      let html = `<h2 class="section-title">${withIcon(ui().sections.countries, 'countries')}</h2><div class="countries-grid">`;
+      list.forEach((c, i) => {
+        const chartId = 'chart-country-' + i;
+        const hasHistory = c.overall_history && Object.keys(c.overall_history).length > 0;
+        const liq = c.liquidity != null ? Number(c.liquidity) : null;
+        const log = c.logistics != null ? Number(c.logistics) : null;
+        const leg = c.legitimacy != null ? Number(c.legitimacy) : null;
+        const liqPct = liq != null ? Math.max(0, Math.min(100, liq)) : 0;
+        const logPct = log != null ? Math.max(0, Math.min(100, log)) : 0;
+        const legPct = leg != null ? Math.max(0, Math.min(100, leg)) : 0;
+        const expandedClass = i === 0 ? 'expanded' : '';
+        html += `
+          <div class="country-card ${expandedClass}">
+            <div class="country-header" data-country-toggle>
+              <div class="country-left">
+                <span class="country-dot" aria-hidden="true"></span>
+                <div class="country-name">${escapeHtml(c.name)}</div>
+              </div>
+              <div class="country-metrics">
+                <span>${ui().metrics.liq}: ${c.liquidity ?? '—'}</span>
+                <span>${ui().metrics.log}: ${c.logistics ?? '—'}</span>
+                <span>${ui().metrics.leg}: ${c.legitimacy ?? '—'}</span>
+                <span class="country-overall">${ui().metrics.overall}: ${c.overall != null ? c.overall : '—'}</span>
+                <span class="country-expand">${i === 0 ? '−' : '+'}</span>
+              </div>
+            </div>
+            <div class="country-detail">
+              <div class="country-bars">
+                <div>
+                  <div class="country-bar-label">${ui().metrics.liq}</div>
+                  <div class="country-bar-track"><div class="country-bar-fill" style="width:${liqPct}%"></div></div>
+                </div>
+                <div>
+                  <div class="country-bar-label">${ui().metrics.log}</div>
+                  <div class="country-bar-track"><div class="country-bar-fill" style="width:${logPct}%"></div></div>
+                </div>
+                <div>
+                  <div class="country-bar-label">${ui().metrics.leg}</div>
+                  <div class="country-bar-track"><div class="country-bar-fill" style="width:${legPct}%"></div></div>
+                </div>
+              </div>
+              ${hasHistory ? `<div class="chart-wrap"><canvas id="${chartId}"></canvas></div>` : ''}
+              <div class="country-note">
+                <span class="country-note-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 3l7 3v6c0 5-3.2 8.8-7 10-3.8-1.2-7-5-7-10V6l7-3z"></path>
+                    <path d="M9.5 12.5l1.7 1.7 3.5-3.5"></path>
+                  </svg>
+                </span>
+                <span>${escapeHtml(t(c.family_safety_note))}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      html += '</div>';
+      return html;
+    }
+
+    function renderScenarios(scenarios) {
+      if (!scenarios || !scenarios.length) return '';
+      let html = `<h2 class="section-title">${withIcon(ui().sections.scenarios, 'scenarios')}</h2><div class="scenarios-list">`;
+      scenarios.forEach(s => {
+        const desc = t(s.description);
+        const when = s.when_visible || s.earliest_date || '';
+        const normalized = (s.name || '').toLowerCase();
+        const toneClass = normalized.includes('optim') ? 'optimistic' : (normalized.includes('pess') ? 'pessimistic' : 'realistic');
+        const badgeText = escapeHtml(s.name.replace(/_/g, ' '));
+        html += `
+          <div class="scenario-card ${toneClass}">
+            <div class="scenario-header">
+              <span class="scenario-badge ${toneClass}">${badgeText}</span>
+              <span class="scenario-prob">${s.probability_percent != null ? s.probability_percent + '%' : ''}</span>
+            </div>
+            <div class="scenario-desc">${escapeHtml(desc)}</div>
+            ${when ? `<div class="scenario-when">Timeline: ${escapeHtml(when)}</div>` : ''}
+          </div>
+        `;
+      });
+      html += '</div>';
+      return html;
+    }
+
+    function escapeHtml(s) {
+      if (s == null) return '';
+      const div = document.createElement('div');
+      div.textContent = s;
+      return div.innerHTML;
+    }
+
+    function render(data) {
+      const chaos = data.global_chaos_probability_100_percent || {};
+      const indicators = data.key_indicators_today || {};
+      const countries = data.countries || [];
+      const scenarios = data.scenarios || [];
+      const shipping = indicators.most_critical_shipping_chokepoint_status;
+
+      let html = '';
+
+      if (chaos.probability_from != null || chaos.probability_to != null) {
+        const from = chaos.probability_from != null ? chaos.probability_from : 0;
+        const to = chaos.probability_to != null ? chaos.probability_to : 0;
+        const fromPct = Math.min(100, Math.max(0, from));
+        const toPct = Math.min(100, Math.max(0, to));
+        html += `
+          <div class="chaos-section">
+            <div class="chaos-gauge-wrap">
+              <div class="chaos-gauge-bg"></div>
+              <div class="chaos-gauge-arc" style="--from-pct: ${fromPct}; --to-pct: ${toPct};"></div>
+              <div class="chaos-gauge-inner">
+                <span class="chaos-gauge-value">${from}–${to}%</span>
+                <span class="chaos-gauge-label">${ui().sections.chaosRisk}</span>
+              </div>
+            </div>
+            <div class="chaos-content card">
+              <h2 class="card-title">${withIcon(ui().sections.globalAssessment, 'globalAssessment')}</h2>
+              ${t(chaos.current_assessment) ? `<p class="assessment">${escapeHtml(t(chaos.current_assessment))}</p>` : ''}
+              ${chaos.triggers_to_watch && Array.isArray(chaos.triggers_to_watch[LANG]) && chaos.triggers_to_watch[LANG].length ? `
+                <p class="card-title" style="margin-top:1rem;margin-bottom:0.35rem;">${withIcon(ui().sections.triggersToWatch, 'triggersToWatch')}</p>
+                <ul class="triggers-list">${chaos.triggers_to_watch[LANG].map((tr, idx) => '<li><span class="trigger-index">' + String(idx + 1).padStart(2, '0') + '</span><span>' + escapeHtml(tr) + '</span></li>').join('')}</ul>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }
+
+      if (shipping && t(shipping)) {
+        html += `
+          <div class="chokepoint-card">
+            <h2 class="card-title">${withIcon(ui().sections.shippingChokepoint, 'shippingChokepoint')}</h2>
+            <p class="chokepoint-text">${escapeHtml(t(shipping))}</p>
+          </div>
+        `;
+      }
+
+      html += renderKeyIndicators(indicators);
+      html += renderCountries(countries);
+      html += renderScenarios(scenarios);
+
+      const headerDate = document.getElementById('header-date');
+      if (headerDate) headerDate.textContent = data.last_updated || '';
+
+      html += `<p class="updated-at">${ui().sections.lastUpdated}: ${escapeHtml(data.last_updated || '')}</p>`;
+
+      document.getElementById('content').innerHTML = html;
+      document.getElementById('content').style.display = 'block';
+      document.getElementById('loading').style.display = 'none';
+      lastData = data;
+
+      document.querySelectorAll('[data-country-toggle]').forEach((toggle) => {
+        toggle.addEventListener('click', () => {
+          const card = toggle.closest('.country-card');
+          if (!card) return;
+          card.classList.toggle('expanded');
+          const marker = toggle.querySelector('.country-expand');
+          if (marker) marker.textContent = card.classList.contains('expanded') ? '−' : '+';
+        });
+      });
+
+      chartInstances.forEach(c => c.destroy());
+      chartInstances.length = 0;
+
+      const indicatorItems = [
+        { key: 'gold_price_history', label: 'Gold', isPercent: false },
+        { key: 'brent_crude_history', label: 'Brent', isPercent: false },
+        { key: 'vix_history', label: 'VIX', isPercent: false },
+      ];
+      indicatorItems.forEach((item, i) => {
+        const hist = indicators[item.key];
+        if (hist && Object.keys(hist).length) {
+          const chart = createMiniChart('chart-indicator-' + i, hist, item.label, item.isPercent);
+          if (chart) chartInstances.push(chart);
+        }
+      });
+
+      const list = countries.filter(c => c.name && !c.name.includes('Duplicate'));
+      list.forEach((c, i) => {
+        if (c.overall_history && Object.keys(c.overall_history).length) {
+          const chart = createMiniChart('chart-country-' + i, c.overall_history, 'Overall', true);
+          if (chart) chartInstances.push(chart);
+        }
+      });
+    }
+
+    function showError(msg) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('error').style.display = 'block';
+      document.getElementById('error').textContent = msg;
+    }
+
+    document.querySelectorAll('.lang-btns button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        LANG = btn.getAttribute('data-lang');
+        document.querySelectorAll('.lang-btns button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyUiCopy();
+        if (lastData) render(lastData);
+      });
+    });
+
+    applyUiCopy();
+
+    fetch('/api/dashboard')
+      .then(async (r) => {
+        const text = await r.text();
+        let data;
+        try { data = text ? JSON.parse(text) : null; } catch (_) { data = null; }
+        if (!r.ok) {
+          const msg = (data && data.error) ? data.error : (r.status === 404 ? ui().errors.noData : `${ui().errors.failedLoad} (${r.status})`);
+          throw new Error(msg);
+        }
+        return data;
+      })
+      .then(data => {
+        if (data && data.error) throw new Error(data.error);
+        render(data);
+      })
+      .catch(err => showError(err.message));
+  </script>
+</body>
+</html>
