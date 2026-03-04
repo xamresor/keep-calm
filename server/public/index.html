@@ -44,52 +44,63 @@
     .container {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 1.25rem 1rem 2.5rem;
+      padding: 0 1.25rem 1rem 2.5rem;
     }
 
-    /* Header – Calm Navigator style */
+    /* Header – Compact Topbar style */
     .header-row {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      padding: 1rem 0 1.4rem;
+      padding: 0.75rem 0;
       border-bottom: 1px solid var(--border);
       margin-bottom: 1rem;
+      backdrop-filter: blur(10px);
+      background: rgba(7, 11, 22, 0.95);
     }
 
     .header-left {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
       flex: 1;
       min-width: 0;
     }
 
-    .site-title-wrap {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 0.35rem;
-    }
-
-    .site-title-wrap svg {
+    .header-left svg {
       flex-shrink: 0;
       color: var(--warning);
+      width: 30px;
+      height: 30px;
+    }
+
+    .site-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      flex: 1;
+      min-width: 0;
     }
 
     .site-title {
-      font-size: clamp(1.06rem, 2vw, 1.26rem);
+      font-size: 0.95rem;
       font-weight: 600;
       letter-spacing: 0.01em;
       margin: 0;
       font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
     }
 
     .disclaimer {
       color: var(--text-disclaimer);
-      font-size: 0.75rem;
+      font-size: 0.6rem;
       margin: 0;
-      max-width: 680px;
       font-family: 'JetBrains Mono', monospace;
+      line-height: 1.4;
     }
 
     .header-meta {
@@ -103,6 +114,7 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.72rem;
       color: var(--text-muted);
+      white-space: nowrap;
     }
 
     .lang-btns {
@@ -193,21 +205,21 @@
     .chaos-gauge-wrap {
       flex-shrink: 0;
       position: relative;
-      width: 190px;
-      height: 190px;
+      width: 120px;
+      height: 120px;
       margin: 0 auto;
     }
 
     .chaos-gauge-bg {
       position: absolute;
-      inset: 0;
+      inset: 0px;
       border-radius: 50%;
       background: conic-gradient(var(--border) 0deg, var(--border) 360deg);
     }
 
     .chaos-gauge-arc {
       position: absolute;
-      inset: 8px;
+      inset: 0px;
       border-radius: 50%;
       background: conic-gradient(
         transparent 0deg,
@@ -219,7 +231,7 @@
 
     .chaos-gauge-inner {
       position: absolute;
-      inset: 27px;
+      inset: 5px;
       border-radius: 50%;
       background: linear-gradient(180deg, #0b1220 0%, #09101d 100%);
       display: flex;
@@ -526,6 +538,7 @@
 
     /* Scenarios */
     .scenarios-list {
+      padding-top: 13px;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 0.8rem;
@@ -548,17 +561,21 @@
     .scenario-card.pessimistic { border-color: rgba(239, 68, 68, 0.33); }
 
     .scenario-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      padding: 0.16rem 0.45rem;
+      position: relative;
+      bottom: 37px;
+      justify-content: space-around;
+      border-radius: 8px 8px 0px 0px;
+      padding: 0.16rem 1.45rem;
       font-size: 0.61rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-family: 'JetBrains Mono', monospace;
       font-weight: 600;
       border: 1px solid transparent;
+      border-bottom: 0;
+      align-content: center;
+      flex-wrap: nowrap;
+      flex-direction: column;
     }
 
     .scenario-badge.optimistic { color: #66e7b7; background: rgba(52, 211, 153, 0.12); border-color: rgba(52, 211, 153, 0.25); }
@@ -576,6 +593,154 @@
       color: var(--text-disclaimer);
       margin-top: 0.4rem;
       font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Timeline flag chart inside each scenario card */
+    .scenario-timeline {
+      margin-top: 0.9rem;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.8rem;
+    }
+
+    .timeline-container {
+      position: relative;
+      padding: 0;
+    }
+
+    .timeline-line {
+      position: absolute;
+      top: 4px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, #f59e0b 0%, #f59e0b85 50%, var(--border) 100%);
+      z-index: 1;
+    }
+
+    .timeline-flag-wrapper {
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      z-index: 4;
+    }
+
+    .timeline-months {
+      position: absolute;
+      top: 24px;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .timeline-month-mark {
+      position: absolute;
+      top: 6px;
+      width: 1px;
+      height: 4px;
+      background: var(--border);
+      opacity: 0.4;
+    }
+
+    .timeline-now-marker {
+      position: relative;
+      top: 5px;
+      width: 2px;
+      height: 9px;
+      background: #f59e0b;
+      opacity: 0.5;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+    }
+
+    .timeline-now-label {
+      position: relative;
+      right: 8px;
+      top: 4px;
+      font-size: 0.55rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .timeline-years {
+      position: relative;
+      height: 0;
+      top: -25px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      margin: 0 13px;
+    }
+
+    .timeline-year {
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      z-index: 3;
+      padding: 0 0.3rem;
+      color: var(--accent);
+    }
+
+    .timeline-flag {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--accent);
+    }
+
+    .timeline-flag-month {
+      font-size: 0.55rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-left: -1px;
+      white-space: nowrap;
+      text-shadow: 0 0 4px rgba(0,0,0,0.8);
+      font-family: 'JetBrains Mono', monospace;
+      position: absolute;
+      top: 13px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .scenario-card.optimistic .timeline-flag-icon {
+      color: var(--success);
+      filter: drop-shadow(0 0 4px rgba(52, 211, 153, 0.4));
+    }
+    .scenario-card.optimistic .timeline-flag-month {
+      color: var(--success);
+    }
+
+    .scenario-card.pessimistic .timeline-flag-icon {
+      color: var(--danger);
+      filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.4));
+    }
+    .scenario-card.pessimistic .timeline-flag-month {
+      color: var(--danger);
+    }
+
+    .timeline-flag-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+
+    .timeline-flag-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      border: 2px solid var(--surface);
+      box-shadow: 0 0 0 2px currentColor;
+    }
+
+    @keyframes flagWave {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-5deg); }
+      75% { transform: rotate(5deg); }
     }
 
     .scenario-header {
@@ -633,6 +798,37 @@
     }
 
     @media (max-width: 780px) {
+      .header-row {
+        flex-wrap: wrap;
+        padding: 0.65rem 0;
+      }
+
+      .header-left {
+        flex: 1 1 100%;
+        order: 1;
+      }
+
+      .site-title {
+        font-size: 0.85rem;
+      }
+
+      .disclaimer {
+        font-size: 0.65rem;
+      }
+
+      .header-meta {
+        flex: 1 1 100%;
+        order: 2;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .header-date {
+        font-size: 0.68rem;
+      }
+
       .country-header {
         flex-direction: column;
         align-items: flex-start;
@@ -652,18 +848,18 @@
   <div class="container">
     <header class="header-row" id="header-row">
       <div class="header-left">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
         <div class="site-title-wrap">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-            <line x1="12" y1="9" x2="12" y2="13"/>
-            <line x1="12" y1="17" x2="12.01" y2="17"/>
-          </svg>
           <h1 class="site-title" id="site-title-text">No Panic. Keep calm, stay informed.</h1>
+          <span class="disclaimer" id="site-subtitle-text">Information is generated by AI. Evaluate on your own risk. Not financial advice. Numbers can differ from real world.</span>
         </div>
-        <p class="disclaimer" id="site-subtitle-text">Information is generated by AI. Evaluate on your own risk. Not financial advice. Numbers can differ from real world.</p>
       </div>
       <div class="header-meta">
-        <span class="header-date" id="header-date"></span>
+        <span class="header-date" id="header-date" style="display: none;"></span>
         <div class="lang-btns" aria-label="Language">
           <button type="button" data-lang="en" class="active">EN</button>
           <button type="button" data-lang="ru">RU</button>
@@ -708,6 +904,13 @@
           policy: 'Policy Uncertainty',
         },
         time: { today: 'Today', daysAgo: 'd ago' },
+        scenarios: {
+          timeline: 'Timeline',
+          optimistic: 'Optimistic',
+          realistic: 'Realistic',
+          pessimistic: 'Pessimistic',
+          chaos100: '100% Chaos'
+        },
         errors: {
           noData: 'No dashboard data. Run: php artisan dashboard:ingest',
           failedLoad: 'Failed to load dashboard',
@@ -736,6 +939,13 @@
           policy: 'Неопределенность политики',
         },
         time: { today: 'Сегодня', daysAgo: 'дн. назад' },
+        scenarios: {
+          timeline: 'Временная шкала',
+          optimistic: 'Оптимистичный',
+          realistic: 'Реалистичный',
+          pessimistic: 'Пессимистичный',
+          chaos100: '100% Хаос'
+        },
         errors: {
           noData: 'Нет данных дашборда. Запустите: php artisan dashboard:ingest',
           failedLoad: 'Не удалось загрузить дашборд',
@@ -764,6 +974,13 @@
           policy: 'Невизначеність політики',
         },
         time: { today: 'Сьогодні', daysAgo: 'дн. тому' },
+        scenarios: {
+          timeline: 'Часова шкала',
+          optimistic: 'Оптимістичний',
+          realistic: 'Реалістичний',
+          pessimistic: 'Песимістичний',
+          chaos100: '100% Хаос'
+        },
         errors: {
           noData: 'Немає даних дашборду. Запустіть: php artisan dashboard:ingest',
           failedLoad: 'Не вдалося завантажити дашборд',
@@ -792,6 +1009,13 @@
           policy: 'Politik-Unsicherheit',
         },
         time: { today: 'Heute', daysAgo: 'Tg. zuvor' },
+        scenarios: {
+          timeline: 'Zeitplan',
+          optimistic: 'Optimistisch',
+          realistic: 'Realistisch',
+          pessimistic: 'Pessimistisch',
+          chaos100: '100% Chaos'
+        },
         errors: {
           noData: 'Keine Dashboard-Daten. Ausführen: php artisan dashboard:ingest',
           failedLoad: 'Dashboard konnte nicht geladen werden',
@@ -820,6 +1044,13 @@
           policy: 'Politikas nenoteiktība',
         },
         time: { today: 'Šodien', daysAgo: 'd. atpakaļ' },
+        scenarios: {
+          timeline: 'Laika skala',
+          optimistic: 'Optimistisks',
+          realistic: 'Reālistisks',
+          pessimistic: 'Pesimistisks',
+          chaos100: '100% Haoss'
+        },
         errors: {
           noData: 'Nav paneļa datu. Palaidiet: php artisan dashboard:ingest',
           failedLoad: 'Neizdevās ielādēt paneli',
@@ -1090,23 +1321,184 @@
       return html;
     }
 
-    function renderScenarios(scenarios) {
+    function extractYear(dateStr) {
+      if (!dateStr) return null;
+      const match = dateStr.match(/\d{4}/);
+      return match ? parseInt(match[0], 10) : null;
+    }
+
+    function extractMonth(dateStr) {
+      if (!dateStr) return 6; // Default to middle of year (June)
+
+      const lowerStr = dateStr.toLowerCase();
+
+      // Try to find Q1, Q2, Q3, Q4 first (more specific)
+      if (lowerStr.includes('q1')) return 2;
+      if (lowerStr.includes('q2')) return 5;
+      if (lowerStr.includes('q3')) return 8;
+      if (lowerStr.includes('q4')) return 11;
+
+      // Try to find month name (check for short and long forms)
+      const monthNames = [
+        ['january', 'jan'], ['february', 'feb'], ['march', 'mar'],
+        ['april', 'apr'], ['may'], ['june', 'jun'],
+        ['july', 'jul'], ['august', 'aug'], ['september', 'sep'],
+        ['october', 'oct'], ['november', 'nov'], ['december', 'dec']
+      ];
+
+      for (let i = 0; i < monthNames.length; i++) {
+        for (let variant of monthNames[i]) {
+          if (lowerStr.includes(variant)) {
+            return i + 1;
+          }
+        }
+      }
+
+      // Try to find numeric month (e.g., "2026-03-15" or "2026/03/15")
+      const monthMatch = dateStr.match(/[-\/](\d{1,2})[-\/]/);
+      if (monthMatch) {
+        const month = parseInt(monthMatch[1], 10);
+        if (month >= 1 && month <= 12) return month;
+      }
+
+      // Try format like "2026-03" or "2026/05" (year-month at end of string)
+      const monthMatch2 = dateStr.match(/[-\/](\d{1,2})$/);
+      if (monthMatch2) {
+        const month = parseInt(monthMatch2[1], 10);
+        if (month >= 1 && month <= 12) return month;
+      }
+
+      // Try format like "03-2026" or "3/2026" (month-year)
+      const monthMatch3 = dateStr.match(/^(\d{1,2})[-\/]/);
+      if (monthMatch3) {
+        const month = parseInt(monthMatch3[1], 10);
+        if (month >= 1 && month <= 12) return month;
+      }
+
+      // Check for "early", "mid", "late" indicators
+      if (lowerStr.includes('early') || lowerStr.includes('beginning')) return 2;
+      if (lowerStr.includes('mid') || lowerStr.includes('middle')) return 6;
+      if (lowerStr.includes('late') || lowerStr.includes('end')) return 10;
+
+      return 6; // Default to middle of year
+    }
+
+    function calculateFlagPosition(month, year, startYear, totalMonths) {
+      // Position flag based on the actual date across a dynamic timeline
+      // Timeline spans from startYear (Jan) to endYear (Dec)
+      // Calculate which month in the totalMonths span (0 to totalMonths-1)
+      const monthsFromStart = (year - startYear) * 12 + (month - 1);
+      // Convert to percentage
+      return (monthsFromStart / totalMonths) * 100;
+    }
+
+    function getMonthAbbreviation(month) {
+      const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+      return months[month - 1] || '';
+    }
+
+    function renderScenarios(scenarios, lastUpdated) {
       if (!scenarios || !scenarios.length) return '';
+
+      let timelineStartYear = null;
+      if (lastUpdated) {
+        timelineStartYear = extractYear(lastUpdated);
+      }
+      if (!timelineStartYear) {
+        timelineStartYear = new Date().getFullYear();
+      }
+
       let html = `<h2 class="section-title">${withIcon(ui().sections.scenarios, 'scenarios')}</h2><div class="scenarios-list">`;
+
       scenarios.forEach(s => {
         const desc = t(s.description);
         const when = s.when_visible || s.earliest_date || '';
         const normalized = (s.name || '').toLowerCase();
         const toneClass = normalized.includes('optim') ? 'optimistic' : (normalized.includes('pess') ? 'pessimistic' : 'realistic');
-        const badgeText = escapeHtml(s.name.replace(/_/g, ' '));
+
+        let badgeText = '';
+        if (normalized.includes('optim')) {
+          badgeText = ui().scenarios.optimistic;
+        } else if (normalized.includes('pess')) {
+          badgeText = ui().scenarios.pessimistic;
+        } else if (normalized.includes('100') || normalized.includes('chaos')) {
+          badgeText = ui().scenarios.chaos100;
+        } else {
+          badgeText = ui().scenarios.realistic;
+        }
+
+        // Generate timeline for this scenario
+        let timelineHtml = '';
+        if (when) {
+          const flagYear = extractYear(when);
+          if (flagYear) {
+            const month = extractMonth(when);
+            const startYear = timelineStartYear;
+            
+            // Dynamic window size: (flagYear + 1) - startYear
+            // This ensures the timeline ends at the start of the year following the flag.
+            const windowYears = Math.max(1, (flagYear + 1) - startYear);
+            const totalMonths = windowYears * 12;
+            
+            // Position flag based on the month and year relative to startYear and totalMonths
+            const flagPosition = calculateFlagPosition(month, flagYear, startYear, totalMonths);
+
+            // Calculate "now" marker position (March 2026 based on the issue description's current date)
+            const now = new Date();
+            const nowYear = now.getFullYear();
+            const nowMonth = now.getMonth() + 1;
+            const nowPosition = calculateFlagPosition(nowMonth, nowYear, startYear, totalMonths);
+
+            // Debug: log the date parsing
+            console.log('Scenario date:', when, '-> Year:', flagYear, 'Month:', month, 'Timeline Start:', startYear, 'Window Years:', windowYears, 'Position:', flagPosition + '%');
+
+            // Generate month markers
+            let monthMarks = '';
+            for (let i = 1; i < totalMonths; i++) {
+              const pos = (i / totalMonths) * 100;
+              monthMarks += `<div class="timeline-month-mark" style="left: ${pos}%"></div>`;
+            }
+
+            let nowMarkerHtml = '';
+            if (nowPosition >= 0 && nowPosition <= 100) {
+              nowMarkerHtml = `<div class="timeline-now-marker" style="left: ${nowPosition}%"><span class="timeline-now-label">NOW</span></div>`;
+            }
+
+            // Generate year labels
+            let yearLabelsHtml = '';
+            for (let i = 0; i <= windowYears; i++) {
+              const pos = (i / windowYears) * 100;
+              yearLabelsHtml += `<span class="timeline-year" style="left: ${pos}%">${startYear + i}</span>`;
+            }
+
+            const monthStr = getMonthAbbreviation(month);
+
+            timelineHtml = `
+              <div class="scenario-timeline">
+                <div class="timeline-container">
+                  <div class="timeline-line"></div>
+                  <div class="timeline-months">${monthMarks}</div>
+                  ${nowMarkerHtml}
+                  <div class="timeline-years">
+                    ${yearLabelsHtml}
+                  </div>
+                  <div class="timeline-flag-wrapper" style="left: ${flagPosition}%">
+                    <div class="timeline-flag">
+
+                      <div class="timeline-flag-dot"></div>
+                      <span class="timeline-flag-month">${monthStr}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>`;
+          }
+        }
+
         html += `
           <div class="scenario-card ${toneClass}">
-            <div class="scenario-header">
-              <span class="scenario-badge ${toneClass}">${badgeText}</span>
-              <span class="scenario-prob">${s.probability_percent != null ? s.probability_percent + '%' : ''}</span>
-            </div>
+          <span class="scenario-badge ${toneClass}">${badgeText} - ${s.probability_percent != null ? s.probability_percent + '%' : ''}</span>
+            ${timelineHtml}
             <div class="scenario-desc">${escapeHtml(desc)}</div>
-            ${when ? `<div class="scenario-when">Timeline: ${escapeHtml(when)}</div>` : ''}
           </div>
         `;
       });
@@ -1148,12 +1540,21 @@
             <div class="chaos-content card">
               <h2 class="card-title">${withIcon(ui().sections.globalAssessment, 'globalAssessment')}</h2>
               ${t(chaos.current_assessment) ? `<p class="assessment">${escapeHtml(t(chaos.current_assessment))}</p>` : ''}
+            </div>
+          </div>
+        `;
+      }
+
+      html += renderScenarios(scenarios, data.last_updated);
+
+      if (chaos.probability_from != null || chaos.probability_to != null) {
+        html += `
+          <div class="chaos-content card">
               ${chaos.triggers_to_watch && Array.isArray(chaos.triggers_to_watch[LANG]) && chaos.triggers_to_watch[LANG].length ? `
                 <p class="card-title" style="margin-top:1rem;margin-bottom:0.35rem;">${withIcon(ui().sections.triggersToWatch, 'triggersToWatch')}</p>
                 <ul class="triggers-list">${chaos.triggers_to_watch[LANG].map((tr, idx) => '<li><span class="trigger-index">' + String(idx + 1).padStart(2, '0') + '</span><span>' + escapeHtml(tr) + '</span></li>').join('')}</ul>
               ` : ''}
             </div>
-          </div>
         `;
       }
 
@@ -1168,7 +1569,6 @@
 
       html += renderKeyIndicators(indicators);
       html += renderCountries(countries);
-      html += renderScenarios(scenarios);
 
       const headerDate = document.getElementById('header-date');
       if (headerDate) headerDate.textContent = data.last_updated || '';

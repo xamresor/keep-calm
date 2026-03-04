@@ -20,8 +20,8 @@ Set "last_updated" to {$targetDate}.
 
 Use this exact structure.
 
-COUNTRIES TO ANALYZE (exactly 14, no omissions):
-USA, China, Eurozone, Russia, UK, Japan, India, Iran, UAE, New Zealand, Latvia, Ukraine, Germany, Developing Markets (EM)
+COUNTRIES TO ANALYZE (exactly 15, no omissions):
+USA, China, Eurozone, Russia, UK, Japan, India, Iran, UAE, New Zealand, Latvia, Ukraine, Germany, Egypt, Developing Markets (EM)
 
 FOR EACH COUNTRY PROVIDE:
 - 4 METRICS today (scale 0–100, 100 = maximum chaos/danger):

@@ -21,20 +21,33 @@ If `composer` is not in your PATH, use the full path or download [Composer-Setup
 
 **2. Environment:**
 
+**Windows:**
 ```powershell
 copy .env.example .env
 # Edit .env if needed (DB, optional GEMINI_API_KEY)
 ```
 
+**Linux/Mac:**
+```bash
+cp .env.example .env
+# Edit .env if needed (DB, optional GEMINI_API_KEY)
+```
+
 **3. Continue (DB + ingest + run):**
 
+**Windows:**
 ```powershell
 .\scripts\continue.ps1
 ```
 
+**Linux/Mac:**
+```bash
+./scripts/continue.sh
+```
+
 This creates `database/database.sqlite` if missing, runs migrations, runs ingest (loads sample JSON), then tells you how to start the server. Or run manually:
 
-```powershell
+```bash
 php artisan migrate --force
 php artisan dashboard:ingest
 php -S localhost:8000 -t public public/router.php
@@ -74,10 +87,26 @@ php artisan dashboard:ingest
 
 ### Cron
 
-Add to crontab to run ingest daily:
+**Linux/Mac:**
+
+Add to crontab to run ingest daily at 6 AM:
+
+```bash
+crontab -e
+```
+
+Then add:
 
 ```
-0 6 * * * cd /path/to/KeepKalmIndex/server && php artisan dashboard:ingest
+0 6 * * * /path/to/KeepCalm/server/scripts/cron-invoke.sh
+```
+
+**Windows:**
+
+Use Task Scheduler or run manually:
+
+```powershell
+.\scripts\cron-invoke.ps1
 ```
 
 ## SOLID layout
