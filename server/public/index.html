@@ -223,9 +223,9 @@
       border-radius: 50%;
       background: conic-gradient(
         transparent 0deg,
-        var(--accent) calc(var(--from-pct) * 3.6deg),
-        var(--accent) calc(var(--to-pct) * 3.6deg),
-        transparent calc(var(--to-pct) * 3.6deg)
+        var(--accent) calc(var(--from-pct, 0) * 3.6deg),
+        var(--accent) calc(var(--to-pct, 0) * 3.6deg),
+        transparent calc(var(--to-pct, 0) * 3.6deg)
       );
     }
 
@@ -538,10 +538,10 @@
 
     /* Scenarios */
     .scenarios-list {
-      padding-top: 13px;
+      padding-top: 1.5rem;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.8rem;
+      gap: 1rem;
     }
 
     @media (max-width: 940px) {
@@ -551,197 +551,198 @@
     .scenario-card {
       background: linear-gradient(180deg, #0f1728 0%, #0d1524 100%);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 0.85rem 1rem;
-      min-height: 178px;
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
 
-    .scenario-card.optimistic { border-color: rgba(52, 211, 153, 0.28); }
-    .scenario-card.realistic { border-color: rgba(245, 158, 11, 0.3); }
-    .scenario-card.pessimistic { border-color: rgba(239, 68, 68, 0.33); }
+    .scenario-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .scenario-card.optimistic { border-color: rgba(52, 211, 153, 0.2); }
+    .scenario-card.realistic { border-color: rgba(245, 158, 11, 0.2); }
+    .scenario-card.pessimistic { border-color: rgba(239, 68, 68, 0.2); }
+
+    .scenario-card.optimistic:hover { border-color: rgba(52, 211, 153, 0.4); }
+    .scenario-card.realistic:hover { border-color: rgba(245, 158, 11, 0.4); }
+    .scenario-card.pessimistic:hover { border-color: rgba(239, 68, 68, 0.4); }
 
     .scenario-badge {
-      position: relative;
-      bottom: 37px;
-      justify-content: space-around;
-      border-radius: 8px 8px 0px 0px;
-      padding: 0.16rem 1.45rem;
-      font-size: 0.61rem;
-      letter-spacing: 0.08em;
+      position: absolute;
+      top: 0;
+      left: 1rem;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 6px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       font-family: 'JetBrains Mono', monospace;
-      font-weight: 600;
+      font-weight: 700;
       border: 1px solid transparent;
-      border-bottom: 0;
-      align-content: center;
-      flex-wrap: nowrap;
-      flex-direction: column;
+      white-space: nowrap;
+      z-index: 10;
     }
 
-    .scenario-badge.optimistic { color: #66e7b7; background: rgba(52, 211, 153, 0.12); border-color: rgba(52, 211, 153, 0.25); }
-    .scenario-badge.realistic { color: #f6b94e; background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.27); }
-    .scenario-badge.pessimistic { color: #fd7f7f; background: rgba(239, 68, 68, 0.12); border-color: rgba(239, 68, 68, 0.28); }
+    .scenario-badge.optimistic { color: #66e7b7; background: #0f1728; border-color: rgba(52, 211, 153, 0.3); }
+    .scenario-badge.realistic { color: #f6b94e; background: #0f1728; border-color: rgba(245, 158, 11, 0.3); }
+    .scenario-badge.pessimistic { color: #fd7f7f; background: #0f1728; border-color: rgba(239, 68, 68, 0.3); }
 
-    .scenario-prob {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: #e7edf9;
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
     }
 
-    .scenario-when {
-      font-size: 0.7rem;
-      color: var(--text-disclaimer);
-      margin-top: 0.4rem;
-      font-family: 'JetBrains Mono', monospace;
+    .scenario-desc {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--tex`t-muted);
+      flex-grow: 1;
     }
 
     /* Timeline flag chart inside each scenario card */
     .scenario-timeline {
-      margin-top: 0.9rem;
-      margin-bottom: 0.8rem;
-      padding-bottom: 0.8rem;
+      margin-top: 0rem;
+      margin-bottom: 0.5rem;
+      padding-top: 1.0rem;
     }
 
     .timeline-container {
       position: relative;
-      padding: 0;
+      height: 24px;
     }
 
     .timeline-line {
       position: absolute;
-      top: 4px;
+      top: 0;
       left: 0;
       right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, #f59e0b 0%, #f59e0b85 50%, var(--border) 100%);
+      height: 2px;
+      background: var(--border);
+      border-radius: 1px;
       z-index: 1;
+    }
+
+    .scenario-card.optimistic .timeline-line {
+      background: linear-gradient(90deg, var(--border) 0%, rgba(52, 211, 153, 0.3) 100%);
     }
 
     .timeline-flag-wrapper {
       position: absolute;
-      top: 0;
+      top: -4px;
       transform: translateX(-50%);
-      z-index: 4;
+      z-index: 5;
     }
 
     .timeline-months {
       position: absolute;
-      top: 24px;
+      top: 0;
       left: 0;
       right: 0;
+      height: 6px;
       pointer-events: none;
       z-index: 2;
     }
 
     .timeline-month-mark {
       position: absolute;
-      top: 6px;
+      top: 0;
       width: 1px;
       height: 4px;
       background: var(--border);
-      opacity: 0.4;
+      opacity: 0.3;
     }
 
     .timeline-now-marker {
-      position: relative;
-      top: 5px;
-      width: 2px;
-      height: 9px;
+      position: absolute;
+      top: 0;
+      width: 8px;
+      height: 8px;
       background: #f59e0b;
-      opacity: 0.5;
-      transform: translate(-50%, -50%);
-      z-index: 5;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+      transform: translate(-50%, -3px);
+      z-index: 4;
+      opacity: 0.8;
     }
 
     .timeline-now-label {
-      position: relative;
-      right: 8px;
-      top: 4px;
-      font-size: 0.55rem;
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.6rem;
       font-weight: 800;
       color: var(--accent);
       text-transform: uppercase;
-      white-space: nowrap;
       font-family: 'JetBrains Mono', monospace;
+      opacity: 0.7;
     }
 
     .timeline-years {
       position: relative;
-      height: 0;
-      top: -25px;
+      top: -15px;
+      left: 0;
+      right: 0;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      margin: 0 13px;
+      font-size: 0.65rem;
+      color: var(--text-disclaimer);
     }
 
     .timeline-year {
       position: absolute;
-      top: 0;
       transform: translateX(-50%);
-      z-index: 3;
-      padding: 0 0.3rem;
-      color: var(--accent);
+      white-space: nowrap;
     }
 
     .timeline-flag {
-      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.25rem;
-      color: var(--accent);
-    }
-
-    .timeline-flag-month {
-      font-size: 0.55rem;
-      font-weight: 800;
-      color: var(--accent);
-      margin-left: -1px;
-      white-space: nowrap;
-      text-shadow: 0 0 4px rgba(0,0,0,0.8);
-      font-family: 'JetBrains Mono', monospace;
-      position: absolute;
-      top: 13px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .scenario-card.optimistic .timeline-flag-icon {
-      color: var(--success);
-      filter: drop-shadow(0 0 4px rgba(52, 211, 153, 0.4));
-    }
-    .scenario-card.optimistic .timeline-flag-month {
-      color: var(--success);
-    }
-
-    .scenario-card.pessimistic .timeline-flag-icon {
-      color: var(--danger);
-      filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.4));
-    }
-    .scenario-card.pessimistic .timeline-flag-month {
-      color: var(--danger);
-    }
-
-    .timeline-flag-icon svg {
-      width: 100%;
-      height: 100%;
-      fill: currentColor;
+      position: relative;
     }
 
     .timeline-flag-dot {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: currentColor;
-      border: 2px solid var(--surface);
-      box-shadow: 0 0 0 2px currentColor;
+      background: var(--accent);
+      border: 2px solid #0f1728;
+      box-shadow: 0 0 0 1px var(--accent);
+      transition: transform 0.2s ease;
     }
 
-    @keyframes flagWave {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(-5deg); }
-      75% { transform: rotate(5deg); }
+    .scenario-card:hover .timeline-flag-dot {
+      transform: scale(1.2);
     }
+
+    .scenario-card.optimistic .timeline-flag-dot { background: var(--success); box-shadow: 0 0 0 1px var(--success); }
+    .scenario-card.realistic .timeline-flag-dot { background: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+    .scenario-card.pessimistic .timeline-flag-dot { background: var(--danger); box-shadow: 0 0 0 1px var(--danger); }
+
+    .timeline-flag-month {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.6rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+    }
+
+    .scenario-card.optimistic .timeline-flag-month { color: var(--success); }
+    .scenario-card.realistic .timeline-flag-month { color: var(--accent); }
+    .scenario-card.pessimistic .timeline-flag-month { color: var(--danger); }
 
     .scenario-header {
       display: flex;
@@ -1496,7 +1497,10 @@
 
         html += `
           <div class="scenario-card ${toneClass}">
-          <span class="scenario-badge ${toneClass}">${badgeText} - ${s.probability_percent != null ? s.probability_percent + '%' : ''}</span>
+            <span class="scenario-badge ${toneClass}">
+              <span class="badge-dot"></span>
+              ${badgeText} ${s.probability_percent != null ? '• ' + s.probability_percent + '%' : ''}
+            </span>
             ${timelineHtml}
             <div class="scenario-desc">${escapeHtml(desc)}</div>
           </div>
