@@ -153,12 +153,12 @@
     }
 
     .card-title {
-      font-size: 0.72rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--subtitle-tint);
       text-transform: uppercase;
       letter-spacing: 0.11em;
-      margin: 0 0 0.75rem;
+      margin: 1rem 0 0 0;
       font-family: 'JetBrains Mono', monospace;
     }
 
@@ -355,7 +355,7 @@
     .indicator-trend.down { color: var(--success); }
 
     .indicator-card .chart-wrap {
-      height: 52px;
+      height: 72px;
       margin-top: 0.6rem;
     }
 
@@ -392,7 +392,7 @@
 
     .country-header {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 0.8rem;
       cursor: pointer;
@@ -400,82 +400,103 @@
 
     .country-left {
       display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .country-info-main {
+      display: flex;
       align-items: center;
       gap: 0.6rem;
-      min-width: 0;
     }
 
     .country-dot {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 999px;
       background: #ef4444;
       flex-shrink: 0;
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
     }
 
     .country-name {
-      font-weight: 600;
-      font-size: 0.98rem;
+      font-weight: 700;
+      font-size: 1.05rem;
       margin: 0;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      color: var(--text);
+      letter-spacing: -0.01em;
     }
 
     .country-metrics {
       display: flex;
-      gap: 0.55rem;
+      gap: 0.45rem;
       align-items: center;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.73rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
       margin: 0;
       flex-wrap: wrap;
       justify-content: flex-end;
+      padding-top: 0.2rem;
     }
 
     .country-metrics span {
       white-space: nowrap;
-      padding: 0.12rem 0.35rem;
-      border-radius: 999px;
-      background: #101d30;
-      border: 1px solid #22344f;
+      padding: 0.1rem 0.4rem;
+      border-radius: 6px;
+      background: rgba(16, 29, 48, 0.5);
+      border: 1px solid rgba(34, 52, 79, 0.5);
     }
 
     .country-overall {
-      font-weight: 600;
-      color: var(--accent);
+      font-weight: 700;
+      color: var(--accent) !important;
+      background: rgba(245, 158, 11, 0.1) !important;
+      border-color: rgba(245, 158, 11, 0.2) !important;
     }
 
     .country-expand {
-      color: var(--text-muted);
+      color: var(--text-disclaimer);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.84rem;
-      margin-left: 0.45rem;
+      font-size: 0.9rem;
+      margin-left: 0.4rem;
+      width: 1.2rem;
+      text-align: right;
     }
 
     .country-detail {
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      margin-top: 0.8rem;
-      border-top: 0 solid #1f304a;
+      margin-top: 0;
+      border-top: 1px solid transparent;
       padding-top: 0;
-      transition: max-height 0.24s ease, opacity 0.18s ease, padding-top 0.24s ease, border-width 0.24s ease;
+      transition: max-height 0.3s ease, opacity 0.2s ease, margin-top 0.3s ease, padding-top 0.3s ease;
     }
 
     .country-card.expanded .country-detail {
-      max-height: 480px;
+      max-height: 800px;
       opacity: 1;
-      border-top-width: 1px;
-      padding-top: 0.8rem;
+      margin-top: 0.75rem;
+      border-top-color: var(--border);
+      padding-top: 0.75rem;
     }
 
     .country-bars {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.65rem;
-      margin-bottom: 0.58rem;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .country-bar-item .chart-wrap {
+      height: 50px;
+      margin-top: 0.35rem;
     }
 
     .country-bar-label {
@@ -505,20 +526,20 @@
     .country-note {
       display: flex;
       align-items: flex-start;
-      gap: 0.45rem;
-      font-size: 0.8125rem;
-      color: var(--text-muted);
-      margin-top: 0.4rem;
-      line-height: 1.45;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      line-height: 1.4;
+      margin-top: 0.1rem;
     }
 
     .country-note-icon {
-      width: 13px;
-      height: 13px;
-      color: #7fd7b4;
-      opacity: 0.95;
+      width: 12px;
+      height: 12px;
+      color: var(--success);
+      opacity: 0.8;
       flex-shrink: 0;
-      margin-top: 0.08rem;
+      margin-top: 0.2rem;
     }
 
     .country-note-icon svg {
@@ -532,13 +553,13 @@
     }
 
     .country-card .chart-wrap {
-      height: 44px;
+      height: 70px;
       margin: 0.5rem 0 0;
     }
 
     /* Scenarios */
     .scenarios-list {
-      padding-top: 1.5rem;
+      padding-top: 0.5rem;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1rem;
@@ -605,7 +626,7 @@
     .scenario-desc {
       font-size: 0.85rem;
       line-height: 1.5;
-      color: var(--tex`t-muted);
+      color: var(--text-muted);
       flex-grow: 1;
     }
 
@@ -634,6 +655,14 @@
 
     .scenario-card.optimistic .timeline-line {
       background: linear-gradient(90deg, var(--border) 0%, rgba(52, 211, 153, 0.3) 100%);
+    }
+
+    .scenario-card.realistic .timeline-line {
+      background: linear-gradient(90deg, var(--border) 0%, rgba(245, 158, 11, 0.3) 100%);
+    }
+
+    .scenario-card.pessimistic .timeline-line {
+      background: linear-gradient(90deg, var(--border) 0%, rgba(239, 68, 68, 0.3) 100%);
     }
 
     .timeline-flag-wrapper {
@@ -761,22 +790,33 @@
 
     /* Shipping chokepoint – red alert */
     .chokepoint-card {
+      margin-top: 0.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .chokepoint-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.86rem;
+      color: #ffe4e4;
       background: linear-gradient(180deg, rgba(127, 24, 24, 0.45) 0%, rgba(106, 23, 23, 0.35) 100%);
       border: 1px solid rgba(239, 68, 68, 0.4);
-      border-radius: 10px;
-      padding: 0.82rem 1rem;
-      margin-top: 0.85rem;
-      margin-bottom: 0.5rem;
+      border-radius: 9px;
+      padding: 0.58rem 0.8rem;
     }
 
-    .chokepoint-card .card-title {
+    .chokepoint-icon {
       color: var(--danger);
-      margin-bottom: 0.5rem;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .chokepoint-text {
-      font-size: 0.91rem;
-      color: #ffe4e4;
+    .chokepoint-icon svg {
+      width: 14px;
+      height: 14px;
     }
 
     /* Loading & error */
@@ -1105,7 +1145,10 @@
 
     function withIcon(label, iconKey) {
       const icon = SECTION_ICONS[iconKey] || '';
-      return `<span class="title-with-icon"><span class="title-icon">${icon}</span><span>${label}</span></span>`;
+      return `<span class="title-with-icon">
+          <span class="title-icon">${icon}</span>
+          <span class="card-title">${label}</span>
+      </span>`;
     }
 
     function ui() {
@@ -1131,6 +1174,28 @@
     function t(obj) {
       if (obj == null) return '';
       return typeof obj === 'string' ? obj : (obj[LANG] ?? obj['en'] ?? Object.values(obj)[0] ?? '');
+    }
+
+    function getScoreColor(score) {
+      if (score == null) return 'var(--text-muted)';
+      const val = Math.max(0, Math.min(100, Number(score)));
+      
+      let r, g, b;
+      if (val < 40) {
+        // Green (0–40) - Keep it solid Green (52, 211, 153)
+        r = 52; g = 211; b = 153;
+      } else if (val < 90) {
+        // Yellow (40–90) - Interpolate between Green (40) and Red (90)
+        // Green (52, 211, 153) to Red (239, 68, 68)
+        const p = (val - 40) / 50;
+        r = Math.round(52 + (239 - 52) * p);
+        g = Math.round(211 + (68 - 211) * p);
+        b = Math.round(153 + (68 - 153) * p);
+      } else {
+        // Red (90–100) - Solid Red (239, 68, 68)
+        r = 239; g = 68; b = 68;
+      }
+      return `rgb(${r}, ${g}, ${b})`;
     }
 
     function historyToSeries(history) {
@@ -1181,34 +1246,62 @@
             fill: true,
             tension: 0.3,
             borderWidth: 2,
-            pointRadius: 2,
+            pointRadius: values.length > 10 ? 1 : 3,
+            pointHoverRadius: 5,
             pointBackgroundColor: (ctx) => {
               const idx = ctx.dataIndex;
               const total = ctx.dataset.data.length;
               const opacity = 0.5 + (0.5 * (idx / (total - 1 || 1)));
               return `rgba(254, 123, 2, ${opacity})`;
             },
+            pointBorderColor: 'rgba(255, 255, 255, 0.2)',
           }],
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false,
+          },
           plugins: {
             legend: { display: false },
             tooltip: {
+              backgroundColor: 'rgba(15, 23, 42, 0.9)',
+              titleFont: { size: 11, family: 'JetBrains Mono' },
+              bodyFont: { size: 12, family: 'JetBrains Mono' },
+              padding: 8,
+              cornerRadius: 6,
+              displayColors: false,
               callbacks: {
-                label: (item) => valueLabel + ': ' + (isPercentLike ? item.raw : item.raw.toLocaleString()),
+                label: (item) => {
+                  const val = isPercentLike ? item.raw : item.raw.toLocaleString();
+                  return `${valueLabel}: ${val}`;
+                }
               },
             },
           },
           scales: {
             x: {
               grid: { display: false },
-              ticks: { color: '#71717a', maxRotation: 0, font: { size: 10 } },
+              ticks: { 
+                color: '#71717a', 
+                maxRotation: 0, 
+                font: { size: 9, family: 'JetBrains Mono' },
+                autoSkip: true,
+                maxTicksLimit: 6
+              },
             },
             y: {
-              grid: { color: 'rgba(255,255,255,0.06)' },
-              ticks: { color: '#71717a', font: { size: 10 } },
+              min: isPercentLike ? 0 : undefined,
+              max: isPercentLike ? 100 : undefined,
+              grid: { color: 'rgba(255,255,255,0.06)', drawBorder: false },
+              ticks: { 
+                color: '#71717a', 
+                font: { size: 9, family: 'JetBrains Mono' },
+                maxTicksLimit: 4,
+                callback: (val) => isPercentLike ? val + '%' : val.toLocaleString()
+              },
             },
           },
         },
@@ -1265,8 +1358,11 @@
       const list = (countries || []).filter(c => c.name && !c.name.includes('Duplicate'));
       let html = `<h2 class="section-title">${withIcon(ui().sections.countries, 'countries')}</h2><div class="countries-grid">`;
       list.forEach((c, i) => {
-        const chartId = 'chart-country-' + i;
-        const hasHistory = c.overall_history && Object.keys(c.overall_history).length > 0;
+        const hasOverallHistory = c.overall_history && Object.keys(c.overall_history).length > 0;
+        const hasLiqHistory = c.liquidity_history && Object.keys(c.liquidity_history).length > 0;
+        const hasLogHistory = c.logistics_history && Object.keys(c.logistics_history).length > 0;
+        const hasLegHistory = c.legitimacy_history && Object.keys(c.legitimacy_history).length > 0;
+
         const liq = c.liquidity != null ? Number(c.liquidity) : null;
         const log = c.logistics != null ? Number(c.logistics) : null;
         const leg = c.legitimacy != null ? Number(c.legitimacy) : null;
@@ -1274,12 +1370,25 @@
         const logPct = log != null ? Math.max(0, Math.min(100, log)) : 0;
         const legPct = leg != null ? Math.max(0, Math.min(100, leg)) : 0;
         const expandedClass = i === 0 ? 'expanded' : '';
+        const dotColor = getScoreColor(c.overall);
+
         html += `
           <div class="country-card ${expandedClass}">
             <div class="country-header" data-country-toggle>
               <div class="country-left">
-                <span class="country-dot" aria-hidden="true"></span>
-                <div class="country-name">${escapeHtml(c.name)}</div>
+                <div class="country-info-main">
+                  <span class="country-dot" style="background: ${dotColor}; box-shadow: 0 0 8px ${dotColor}66;" aria-hidden="true"></span>
+                  <div class="country-name">${escapeHtml(c.name)}</div>
+                </div>
+                <div class="country-note">
+                  <span class="country-note-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 3l7 3v6c0 5-3.2 8.8-7 10-3.8-1.2-7-5-7-10V6l7-3z"></path>
+                      <path d="M9.5 12.5l1.7 1.7 3.5-3.5"></path>
+                    </svg>
+                  </span>
+                  <span>${escapeHtml(t(c.family_safety_note))}</span>
+                </div>
               </div>
               <div class="country-metrics">
                 <span>${ui().metrics.liq}: ${c.liquidity ?? '—'}</span>
@@ -1291,29 +1400,20 @@
             </div>
             <div class="country-detail">
               <div class="country-bars">
-                <div>
+                <div class="country-bar-item">
                   <div class="country-bar-label">${ui().metrics.liq}</div>
-                  <div class="country-bar-track"><div class="country-bar-fill" style="width:${liqPct}%"></div></div>
+                  ${hasLiqHistory ? `<div class="chart-wrap"><canvas id="chart-country-liq-${i}"></canvas></div>` : ''}
                 </div>
-                <div>
+                <div class="country-bar-item">
                   <div class="country-bar-label">${ui().metrics.log}</div>
-                  <div class="country-bar-track"><div class="country-bar-fill" style="width:${logPct}%"></div></div>
+                  ${hasLogHistory ? `<div class="chart-wrap"><canvas id="chart-country-log-${i}"></canvas></div>` : ''}
                 </div>
-                <div>
+                <div class="country-bar-item">
                   <div class="country-bar-label">${ui().metrics.leg}</div>
-                  <div class="country-bar-track"><div class="country-bar-fill" style="width:${legPct}%"></div></div>
+                  ${hasLegHistory ? `<div class="chart-wrap"><canvas id="chart-country-leg-${i}"></canvas></div>` : ''}
                 </div>
               </div>
-              ${hasHistory ? `<div class="chart-wrap"><canvas id="${chartId}"></canvas></div>` : ''}
-              <div class="country-note">
-                <span class="country-note-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M12 3l7 3v6c0 5-3.2 8.8-7 10-3.8-1.2-7-5-7-10V6l7-3z"></path>
-                    <path d="M9.5 12.5l1.7 1.7 3.5-3.5"></path>
-                  </svg>
-                </span>
-                <span>${escapeHtml(t(c.family_safety_note))}</span>
-              </div>
+              ${hasOverallHistory ? `<div class="chart-wrap"><canvas id="chart-country-overall-${i}"></canvas></div>` : ''}
             </div>
           </div>
         `;
@@ -1542,7 +1642,7 @@
               </div>
             </div>
             <div class="chaos-content card">
-              <h2 class="card-title">${withIcon(ui().sections.globalAssessment, 'globalAssessment')}</h2>
+              <h2 class="section-title">${withIcon(ui().sections.globalAssessment, 'globalAssessment')}</h2>
               ${t(chaos.current_assessment) ? `<p class="assessment">${escapeHtml(t(chaos.current_assessment))}</p>` : ''}
             </div>
           </div>
@@ -1565,8 +1665,10 @@
       if (shipping && t(shipping)) {
         html += `
           <div class="chokepoint-card">
-            <h2 class="card-title">${withIcon(ui().sections.shippingChokepoint, 'shippingChokepoint')}</h2>
-            <p class="chokepoint-text">${escapeHtml(t(shipping))}</p>
+            <div class="chokepoint-item">
+              <span class="chokepoint-icon">${withIcon('', 'shippingChokepoint')}</span>
+              <span>${escapeHtml(t(shipping))}</span>
+            </div>
           </div>
         `;
       }
@@ -1613,7 +1715,19 @@
       const list = countries.filter(c => c.name && !c.name.includes('Duplicate'));
       list.forEach((c, i) => {
         if (c.overall_history && Object.keys(c.overall_history).length) {
-          const chart = createMiniChart('chart-country-' + i, c.overall_history, 'Overall', true);
+          const chart = createMiniChart('chart-country-overall-' + i, c.overall_history, 'Overall', true);
+          if (chart) chartInstances.push(chart);
+        }
+        if (c.liquidity_history && Object.keys(c.liquidity_history).length) {
+          const chart = createMiniChart('chart-country-liq-' + i, c.liquidity_history, 'Liquidity', true);
+          if (chart) chartInstances.push(chart);
+        }
+        if (c.logistics_history && Object.keys(c.logistics_history).length) {
+          const chart = createMiniChart('chart-country-log-' + i, c.logistics_history, 'Logistics', true);
+          if (chart) chartInstances.push(chart);
+        }
+        if (c.legitimacy_history && Object.keys(c.legitimacy_history).length) {
+          const chart = createMiniChart('chart-country-leg-' + i, c.legitimacy_history, 'Legitimacy', true);
           if (chart) chartInstances.push(chart);
         }
       });

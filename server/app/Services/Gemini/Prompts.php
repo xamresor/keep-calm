@@ -20,8 +20,8 @@ Set "last_updated" to {$targetDate}.
 
 Use this exact structure.
 
-COUNTRIES TO ANALYZE (exactly 15, no omissions):
-USA, China, Eurozone, Russia, UK, Japan, India, Iran, UAE, New Zealand, Latvia, Ukraine, Germany, Egypt, Developing Markets (EM)
+COUNTRIES TO ANALYZE (exactly 22, no omissions):
+USA, China, Eurozone, Russia, UK, Japan, India, Iran, UAE, Saudi Arabia, Turkey, Brazil, South Africa, South Korea, Australia, New Zealand, Israel, Poland, Latvia, Ukraine, Germany, Egypt, Developing Markets (EM)
 
 FOR EACH COUNTRY PROVIDE:
 - 4 METRICS today (scale 0–100, 100 = maximum chaos/danger):
@@ -145,7 +145,7 @@ FORMAT AS VALID JSON ONLY. No text outside. Example:
         "lv": "Piezīme Latvijas ģimenēm pie austrumu robežas"
       }
     }
-    // ... remaining 12 countries with the same structure (including Ukraine)
+    // ... remaining 19 countries with the same structure (including Ukraine)
   ],
   "scenarios": [
     {
