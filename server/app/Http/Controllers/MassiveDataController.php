@@ -13,7 +13,7 @@ class MassiveDataController
 {
     public function getIndices(Request $request): JsonResponse
     {
-        $date = $request->query('date', now()->format('Y-m-d'));
+        $date = $request->query('date', \Carbon\Carbon::now()->format('Y-m-d'));
 
         $indices = MarketIndex::where('snapshot_date', $date)
             ->orderBy('ticker')
@@ -29,7 +29,7 @@ class MassiveDataController
 
     public function getStocks(Request $request): JsonResponse
     {
-        $date = $request->query('date', now()->format('Y-m-d'));
+        $date = $request->query('date', \Carbon\Carbon::now()->format('Y-m-d'));
         $limit = min((int) $request->query('limit', 50), 100);
 
         $stocks = MarketStock::where('snapshot_date', $date)
@@ -92,7 +92,7 @@ class MassiveDataController
 
     public function getMarketOverview(): JsonResponse
     {
-        $today = now()->format('Y-m-d');
+        $today = \Carbon\Carbon::now()->format('Y-m-d');
 
         $indices = MarketIndex::where('snapshot_date', $today)->get();
         $topGainers = MarketStock::where('snapshot_date', $today)

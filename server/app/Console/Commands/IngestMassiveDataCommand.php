@@ -84,7 +84,7 @@ class IngestMassiveDataCommand extends Command
             return;
         }
 
-        $snapshotDate = now()->format('Y-m-d');
+        $snapshotDate = \Carbon\Carbon::now()->format('Y-m-d');
         $count = 0;
 
         foreach ($response['results'] as $index) {
@@ -121,7 +121,7 @@ class IngestMassiveDataCommand extends Command
     {
         $this->info('Ingesting top market movers...');
 
-        $snapshotDate = now()->format('Y-m-d');
+        $snapshotDate = \Carbon\Carbon::now()->format('Y-m-d');
         $count = 0;
 
         $gainers = $this->client->getTopGainers(20);
@@ -189,7 +189,7 @@ class IngestMassiveDataCommand extends Command
                         [
                             'indicator_type' => 'inflation',
                             'indicator_name' => $item['name'] ?? 'Unknown',
-                            'date' => $item['date'] ?? now()->format('Y-m-d'),
+                            'date' => $item['date'] ?? \Carbon\Carbon::now()->format('Y-m-d'),
                         ],
                         [
                             'value' => $item['value'] ?? null,
@@ -212,7 +212,7 @@ class IngestMassiveDataCommand extends Command
                         [
                             'indicator_type' => 'labor_market',
                             'indicator_name' => $item['name'] ?? 'Unknown',
-                            'date' => $item['date'] ?? now()->format('Y-m-d'),
+                            'date' => $item['date'] ?? \Carbon\Carbon::now()->format('Y-m-d'),
                         ],
                         [
                             'value' => $item['value'] ?? null,
@@ -235,7 +235,7 @@ class IngestMassiveDataCommand extends Command
                         [
                             'indicator_type' => 'treasury_yields',
                             'indicator_name' => $item['name'] ?? 'Unknown',
-                            'date' => $item['date'] ?? now()->format('Y-m-d'),
+                            'date' => $item['date'] ?? \Carbon\Carbon::now()->format('Y-m-d'),
                         ],
                         [
                             'value' => $item['value'] ?? null,
