@@ -13,4 +13,12 @@ $router->get('/', function () {
 
 $router->group(['prefix' => 'api'], function (Router $router) {
     $router->get('dashboard', ['uses' => 'DashboardController@index']);
+
+    $router->group(['prefix' => 'market'], function (Router $router) {
+        $router->get('overview', ['uses' => 'MassiveDataController@getMarketOverview']);
+        $router->get('indices', ['uses' => 'MassiveDataController@getIndices']);
+        $router->get('stocks', ['uses' => 'MassiveDataController@getStocks']);
+        $router->get('economy', ['uses' => 'MassiveDataController@getEconomicIndicators']);
+        $router->get('news', ['uses' => 'MassiveDataController@getNews']);
+    });
 });

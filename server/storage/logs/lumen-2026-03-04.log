@@ -1,0 +1,1057 @@
+[2026-03-04 07:52:08] production.ERROR: SQLSTATE[HY000] [1698] Access denied for user 'root'@'localhost' (Connection: mysql, SQL: select table_name as `name`, (data_length + index_length) as `size`, table_comment as `comment`, engine as `engine`, table_collation as `collation` from information_schema.tables where table_schema = 'keepkalm' and table_type in ('BASE TABLE', 'SYSTEM VERSIONED') order by table_name) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 1698): SQLSTATE[HY000] [1698] Access denied for user 'root'@'localhost' (Connection: mysql, SQL: select table_name as `name`, (data_length + index_length) as `size`, table_comment as `comment`, engine as `engine`, table_collation as `collation` from information_schema.tables where table_schema = 'keepkalm' and table_type in ('BASE TABLE', 'SYSTEM VERSIONED') order by table_name) at /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php:829)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(783): Illuminate\\Database\\Connection->runQueryCallback()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(414): Illuminate\\Database\\Connection->run()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(401): Illuminate\\Database\\Connection->select()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Schema/MySqlBuilder.php(41): Illuminate\\Database\\Connection->selectFromWriteConnection()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Schema/Builder.php(165): Illuminate\\Database\\Schema\\MySqlBuilder->getTables()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Migrations/DatabaseMigrationRepository.php(184): Illuminate\\Database\\Schema\\Builder->hasTable()
+#6 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Migrations/Migrator.php(727): Illuminate\\Database\\Migrations\\DatabaseMigrationRepository->repositoryExists()
+#7 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(140): Illuminate\\Database\\Migrations\\Migrator->repositoryExists()
+#8 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/support/helpers.php(261): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#9 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(140): retry()
+#10 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(116): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->repositoryExists()
+#11 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(84): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->prepareDatabase()
+#12 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Migrations/Migrator.php(641): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#13 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(83): Illuminate\\Database\\Migrations\\Migrator->usingConnection()
+#14 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#15 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#16 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure()
+#17 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#18 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/Container.php(662): Illuminate\\Container\\BoundMethod::call()
+#19 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/console/Command.php(211): Illuminate\\Container\\Container->call()
+#20 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Command/Command.php(326): Illuminate\\Console\\Command->execute()
+#21 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/console/Command.php(180): Symfony\\Component\\Console\\Command\\Command->run()
+#22 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(1098): Illuminate\\Console\\Command->run()
+#23 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(324): Symfony\\Component\\Console\\Application->doRunCommand()
+#24 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(175): Symfony\\Component\\Console\\Application->doRun()
+#25 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Console/Kernel.php(160): Symfony\\Component\\Console\\Application->run()
+#26 /home/roman/PhpstormProjects/KeepCalm/server/artisan(12): Laravel\\Lumen\\Console\\Kernel->handle()
+#27 {main}
+
+[previous exception] [object] (PDOException(code: 1698): SQLSTATE[HY000] [1698] Access denied for user 'root'@'localhost' at /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connectors/Connector.php:65)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connectors/Connector.php(65): PDO->__construct()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connectors/Connector.php(44): Illuminate\\Database\\Connectors\\Connector->createPdoConnection()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connectors/MySqlConnector.php(24): Illuminate\\Database\\Connectors\\Connector->createConnection()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connectors/ConnectionFactory.php(184): Illuminate\\Database\\Connectors\\MySqlConnector->connect()
+#4 [internal function]: Illuminate\\Database\\Connectors\\ConnectionFactory->Illuminate\\Database\\Connectors\\{closure}()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(1339): call_user_func()
+#6 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(528): Illuminate\\Database\\Connection->getPdo()
+#7 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(423): Illuminate\\Database\\Connection->getPdoForSelect()
+#8 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(816): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}()
+#9 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(783): Illuminate\\Database\\Connection->runQueryCallback()
+#10 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(414): Illuminate\\Database\\Connection->run()
+#11 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(401): Illuminate\\Database\\Connection->select()
+#12 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Schema/MySqlBuilder.php(41): Illuminate\\Database\\Connection->selectFromWriteConnection()
+#13 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Schema/Builder.php(165): Illuminate\\Database\\Schema\\MySqlBuilder->getTables()
+#14 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Migrations/DatabaseMigrationRepository.php(184): Illuminate\\Database\\Schema\\Builder->hasTable()
+#15 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Migrations/Migrator.php(727): Illuminate\\Database\\Migrations\\DatabaseMigrationRepository->repositoryExists()
+#16 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(140): Illuminate\\Database\\Migrations\\Migrator->repositoryExists()
+#17 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/support/helpers.php(261): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#18 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(140): retry()
+#19 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(116): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->repositoryExists()
+#20 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(84): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->prepareDatabase()
+#21 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Migrations/Migrator.php(641): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#22 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(83): Illuminate\\Database\\Migrations\\Migrator->usingConnection()
+#23 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#24 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#25 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure()
+#26 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#27 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/Container.php(662): Illuminate\\Container\\BoundMethod::call()
+#28 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/console/Command.php(211): Illuminate\\Container\\Container->call()
+#29 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Command/Command.php(326): Illuminate\\Console\\Command->execute()
+#30 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/console/Command.php(180): Symfony\\Component\\Console\\Command\\Command->run()
+#31 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(1098): Illuminate\\Console\\Command->run()
+#32 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(324): Symfony\\Component\\Console\\Application->doRunCommand()
+#33 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(175): Symfony\\Component\\Console\\Application->doRun()
+#34 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Console/Kernel.php(160): Symfony\\Component\\Console\\Application->run()
+#35 /home/roman/PhpstormProjects/KeepCalm/server/artisan(12): Laravel\\Lumen\\Console\\Kernel->handle()
+#36 {main}
+"} 
+[2026-03-04 07:52:19] production.ERROR: SQLSTATE[HY000] [1698] Access denied for user 'root'@'localhost' (Connection: mysql, SQL: select table_name as `name`, (data_length + index_length) as `size`, table_comment as `comment`, engine as `engine`, table_collation as `collation` from information_schema.tables where table_schema = 'keepkalm' and table_type in ('BASE TABLE', 'SYSTEM VERSIONED') order by table_name) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 1698): SQLSTATE[HY000] [1698] Access denied for user 'root'@'localhost' (Connection: mysql, SQL: select table_name as `name`, (data_length + index_length) as `size`, table_comment as `comment`, engine as `engine`, table_collation as `collation` from information_schema.tables where table_schema = 'keepkalm' and table_type in ('BASE TABLE', 'SYSTEM VERSIONED') order by table_name) at /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php:829)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(783): Illuminate\\Database\\Connection->runQueryCallback()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(414): Illuminate\\Database\\Connection->run()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(401): Illuminate\\Database\\Connection->select()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Schema/MySqlBuilder.php(41): Illuminate\\Database\\Connection->selectFromWriteConnection()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Schema/Builder.php(165): Illuminate\\Database\\Schema\\MySqlBuilder->getTables()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Migrations/DatabaseMigrationRepository.php(184): Illuminate\\Database\\Schema\\Builder->hasTable()
+#6 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Migrations/Migrator.php(727): Illuminate\\Database\\Migrations\\DatabaseMigrationRepository->repositoryExists()
+#7 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(140): Illuminate\\Database\\Migrations\\Migrator->repositoryExists()
+#8 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/support/helpers.php(261): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#9 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(140): retry()
+#10 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(116): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->repositoryExists()
+#11 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(84): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->prepareDatabase()
+#12 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Migrations/Migrator.php(641): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#13 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(83): Illuminate\\Database\\Migrations\\Migrator->usingConnection()
+#14 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#15 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#16 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure()
+#17 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#18 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/Container.php(662): Illuminate\\Container\\BoundMethod::call()
+#19 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/console/Command.php(211): Illuminate\\Container\\Container->call()
+#20 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Command/Command.php(326): Illuminate\\Console\\Command->execute()
+#21 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/console/Command.php(180): Symfony\\Component\\Console\\Command\\Command->run()
+#22 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(1098): Illuminate\\Console\\Command->run()
+#23 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(324): Symfony\\Component\\Console\\Application->doRunCommand()
+#24 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(175): Symfony\\Component\\Console\\Application->doRun()
+#25 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Console/Kernel.php(160): Symfony\\Component\\Console\\Application->run()
+#26 /home/roman/PhpstormProjects/KeepCalm/server/artisan(12): Laravel\\Lumen\\Console\\Kernel->handle()
+#27 {main}
+
+[previous exception] [object] (PDOException(code: 1698): SQLSTATE[HY000] [1698] Access denied for user 'root'@'localhost' at /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connectors/Connector.php:65)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connectors/Connector.php(65): PDO->__construct()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connectors/Connector.php(44): Illuminate\\Database\\Connectors\\Connector->createPdoConnection()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connectors/MySqlConnector.php(24): Illuminate\\Database\\Connectors\\Connector->createConnection()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connectors/ConnectionFactory.php(184): Illuminate\\Database\\Connectors\\MySqlConnector->connect()
+#4 [internal function]: Illuminate\\Database\\Connectors\\ConnectionFactory->Illuminate\\Database\\Connectors\\{closure}()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(1339): call_user_func()
+#6 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(528): Illuminate\\Database\\Connection->getPdo()
+#7 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(423): Illuminate\\Database\\Connection->getPdoForSelect()
+#8 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(816): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}()
+#9 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(783): Illuminate\\Database\\Connection->runQueryCallback()
+#10 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(414): Illuminate\\Database\\Connection->run()
+#11 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Connection.php(401): Illuminate\\Database\\Connection->select()
+#12 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Schema/MySqlBuilder.php(41): Illuminate\\Database\\Connection->selectFromWriteConnection()
+#13 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Schema/Builder.php(165): Illuminate\\Database\\Schema\\MySqlBuilder->getTables()
+#14 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Migrations/DatabaseMigrationRepository.php(184): Illuminate\\Database\\Schema\\Builder->hasTable()
+#15 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Migrations/Migrator.php(727): Illuminate\\Database\\Migrations\\DatabaseMigrationRepository->repositoryExists()
+#16 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(140): Illuminate\\Database\\Migrations\\Migrator->repositoryExists()
+#17 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/support/helpers.php(261): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#18 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(140): retry()
+#19 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(116): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->repositoryExists()
+#20 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(84): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->prepareDatabase()
+#21 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Migrations/Migrator.php(641): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#22 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/database/Console/Migrations/MigrateCommand.php(83): Illuminate\\Database\\Migrations\\Migrator->usingConnection()
+#23 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#24 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#25 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure()
+#26 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#27 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/container/Container.php(662): Illuminate\\Container\\BoundMethod::call()
+#28 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/console/Command.php(211): Illuminate\\Container\\Container->call()
+#29 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Command/Command.php(326): Illuminate\\Console\\Command->execute()
+#30 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/console/Command.php(180): Symfony\\Component\\Console\\Command\\Command->run()
+#31 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(1098): Illuminate\\Console\\Command->run()
+#32 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(324): Symfony\\Component\\Console\\Application->doRunCommand()
+#33 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(175): Symfony\\Component\\Console\\Application->doRun()
+#34 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Console/Kernel.php(160): Symfony\\Component\\Console\\Application->run()
+#35 /home/roman/PhpstormProjects/KeepCalm/server/artisan(12): Laravel\\Lumen\\Console\\Kernel->handle()
+#36 {main}
+"} 
+[2026-03-04 07:56:12] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 07:57:26] local.ERROR: The "--rollback" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--rollback\" option does not exist. at /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Input/ArgvInput.php:223)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Input/ArgvInput.php(152): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Input/ArgvInput.php(85): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Input/ArgvInput.php(74): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Input/Input.php(56): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Command/Command.php(285): Symfony\\Component\\Console\\Input\\Input->bind()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/vendor/illuminate/console/Command.php(180): Symfony\\Component\\Console\\Command\\Command->run()
+#6 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(1098): Illuminate\\Console\\Command->run()
+#7 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(324): Symfony\\Component\\Console\\Application->doRunCommand()
+#8 /home/roman/PhpstormProjects/KeepCalm/server/vendor/symfony/console/Application.php(175): Symfony\\Component\\Console\\Application->doRun()
+#9 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Console/Kernel.php(160): Symfony\\Component\\Console\\Application->run()
+#10 /home/roman/PhpstormProjects/KeepCalm/server/artisan(12): Laravel\\Lumen\\Console\\Kernel->handle()
+#11 {main}
+"} 
+[2026-03-04 08:59:03] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:01:01] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:11:03] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:13:35] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:15:39] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:15:51] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:16:25] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:17:11] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:17:24] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:17:42] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:17:50] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:17:57] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:18:24] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:18:44] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:18:55] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:19:02] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:19:14] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:19:27] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:20:03] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:20:57] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:21:09] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:21:29] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:21:43] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:21:50] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:22:07] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:22:25] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:22:34] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:23:43] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:24:05] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:24:57] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:25:11] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:25:24] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 09:34:55] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:12:26] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:12:55] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:15:38] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:18:41] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:23:15] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:23:20] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:24:19] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:32:56] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:36:01] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:37:12] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:38:14] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:49:35] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:50:51] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:51:33] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:52:29] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:52:59] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:54:27] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:54:46] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:55:04] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:55:24] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:55:35] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:55:48] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:55:59] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 21:59:08] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:00:49] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:01:48] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:02:11] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:03:57] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:06:13] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:07:42] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:08:24] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:18:32] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:19:41] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:20:40] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:21:18] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:23:36] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:28:44] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:35:08] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:37:15] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:39:09] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:41:23] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:47:15] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:49:39] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:50:38] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:51:36] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:51:54] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:53:50] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:57:41] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 22:59:26] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 23:09:39] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 23:10:09] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 23:10:36] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 23:12:32] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 23:13:33] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 23:14:49] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 
+[2026-03-04 23:19:32] local.ERROR:  {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException(code: 0):  at /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:235)
+[stacktrace]
+#0 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse()
+#1 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline()
+#3 /home/roman/PhpstormProjects/KeepCalm/server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch()
+#4 /home/roman/PhpstormProjects/KeepCalm/server/public/index.php(5): Laravel\\Lumen\\Application->run()
+#5 /home/roman/PhpstormProjects/KeepCalm/server/public/router.php(23): require('...')
+#6 {main}
+"} 

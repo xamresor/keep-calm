@@ -16,18 +16,10 @@ class Country extends Model
         'logistics',
         'legitimacy',
         'overall',
-        'liquidity_history',
-        'logistics_history',
-        'legitimacy_history',
-        'overall_history',
         'family_safety_note',
     ];
 
     protected $casts = [
-        'liquidity_history' => 'array',
-        'logistics_history' => 'array',
-        'legitimacy_history' => 'array',
-        'overall_history' => 'array',
         'family_safety_note' => 'array',
     ];
 

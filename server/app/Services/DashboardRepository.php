@@ -28,6 +28,7 @@ class DashboardRepository implements DashboardRepositoryInterface
                     'global_chaos' => $snapshotData['global_chaos'],
                     'key_indicators' => $snapshotData['key_indicators'],
                     'shipping_chokepoint' => $snapshotData['shipping_chokepoint'],
+                    'last_updated_news_titles' => $snapshotData['last_updated_news_titles'] ?? [],
                 ])->save();
             } else {
                 $snapshot = Snapshot::create([
@@ -35,6 +36,7 @@ class DashboardRepository implements DashboardRepositoryInterface
                     'global_chaos' => $snapshotData['global_chaos'],
                     'key_indicators' => $snapshotData['key_indicators'],
                     'shipping_chokepoint' => $snapshotData['shipping_chokepoint'],
+                    'last_updated_news_titles' => $snapshotData['last_updated_news_titles'] ?? [],
                 ]);
             }
 

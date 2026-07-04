@@ -935,6 +935,7 @@
           keyIndicators: 'Key indicators',
           countries: 'Country risk index',
           scenarios: 'Scenarios',
+          latestNews: 'Latest news',
           lastUpdated: 'Last updated',
         },
         metrics: { liq: 'Liq', log: 'Log', leg: 'Leg', overall: 'Overall' },
@@ -970,6 +971,7 @@
           keyIndicators: 'Ключевые индикаторы',
           countries: 'Индекс странового риска',
           scenarios: 'Сценарии',
+          latestNews: 'Последние новости',
           lastUpdated: 'Обновлено',
         },
         metrics: { liq: 'Ликв', log: 'Лог', leg: 'Лег', overall: 'Итог' },
@@ -1005,6 +1007,7 @@
           keyIndicators: 'Ключові індикатори',
           countries: 'Індекс ризику країн',
           scenarios: 'Сценарії',
+          latestNews: 'Останні новини',
           lastUpdated: 'Оновлено',
         },
         metrics: { liq: 'Лікв', log: 'Лог', leg: 'Лег', overall: 'Заг.' },
@@ -1040,6 +1043,7 @@
           keyIndicators: 'Schlüsselindikatoren',
           countries: 'Länderrisikoindex',
           scenarios: 'Szenarien',
+          latestNews: 'Neueste Nachrichten',
           lastUpdated: 'Zuletzt aktualisiert',
         },
         metrics: { liq: 'Liq', log: 'Log', leg: 'Leg', overall: 'Gesamt' },
@@ -1075,6 +1079,7 @@
           keyIndicators: 'Galvenie rādītāji',
           countries: 'Valstu riska indekss',
           scenarios: 'Scenāriji',
+          latestNews: 'Jaunākās ziņas',
           lastUpdated: 'Atjaunināts',
         },
         metrics: { liq: 'Likv', log: 'Loģ', leg: 'Leģ', overall: 'Kopā' },
@@ -1139,6 +1144,14 @@
           <path d="M10.3 3.9L2 18a2 2 0 0 0 1.7 3h16.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>
           <path d="M12 9v4"></path>
           <path d="M12 17h.01"></path>
+        </svg>
+      `,
+      latestNews: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path>
+          <path d="M18 14h-8"></path>
+          <path d="M15 18h-5"></path>
+          <path d="M10 6h8v4h-8V6z"></path>
         </svg>
       `,
     };
@@ -1644,12 +1657,24 @@
             <div class="chaos-content card">
               <h2 class="section-title">${withIcon(ui().sections.globalAssessment, 'globalAssessment')}</h2>
               ${t(chaos.current_assessment) ? `<p class="assessment">${escapeHtml(t(chaos.current_assessment))}</p>` : ''}
+
             </div>
           </div>
         `;
       }
 
       html += renderScenarios(scenarios, data.last_updated);
+
+      if (data.last_updated_news_titles && Array.isArray(data.last_updated_news_titles[LANG]) && data.last_updated_news_titles[LANG].length) {
+        html += `
+          <div class="chaos-content card" style="margin-top:1rem;">
+            <h2 class="section-title">${withIcon(ui().sections.latestNews, 'latestNews')}</h2>
+            <ul class="triggers-list" style="border-top:none;padding-top:0;">
+              ${data.last_updated_news_titles[LANG].map((title) => '<li><span class="trigger-index">#</span><span>' + escapeHtml(title) + '</span></li>').join('')}
+            </ul>
+          </div>
+        `;
+      }
 
       if (chaos.probability_from != null || chaos.probability_to != null) {
         html += `

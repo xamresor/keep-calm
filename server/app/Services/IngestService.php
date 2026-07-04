@@ -71,10 +71,6 @@ class IngestService implements IngestServiceInterface
             'logistics' => $c->logistics,
             'legitimacy' => $c->legitimacy,
             'overall' => $c->overall,
-            'liquidity_history' => $c->liquidity_history ?? [],
-            'logistics_history' => $c->logistics_history ?? [],
-            'legitimacy_history' => $c->legitimacy_history ?? [],
-            'overall_history' => $c->overall_history ?? [],
             'family_safety_note' => $c->family_safety_note ?? [],
         ])->toArray();
 
@@ -92,6 +88,7 @@ class IngestService implements IngestServiceInterface
         return [
             'last_updated' => $snapshot->last_updated->format('Y-m-d'),
             'global_chaos_probability_100_percent' => $chaos,
+            'last_updated_news_titles' => $snapshot->last_updated_news_titles ?? [],
             'countries' => $countries,
             'scenarios' => $scenarios,
             'key_indicators_today' => $indicators,

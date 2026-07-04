@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\IngestDashboardCommand::class,
         Commands\DbInitCommand::class,
+        Commands\IngestMassiveDataCommand::class,
     ];
 
     /**
@@ -24,6 +25,10 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('dashboard:ingest')
             ->daily()
+            ->withoutOverlapping();
+
+        $schedule->command('massive:ingest --all')
+            ->hourly()
             ->withoutOverlapping();
     }
 }

@@ -26,25 +26,26 @@ USA, China, Eurozone, Russia, UK, Japan, India, Iran, UAE, Saudi Arabia, Turkey,
 FOR EACH COUNTRY PROVIDE:
 - 4 METRICS today (scale 0–100, 100 = maximum chaos/danger):
   Liquidity, Logistics, Legitimacy, Overall (average)
-- Time-series for each metric: object with keys = days ago (0 = today, 1 = 1 day ago, 5 = 5 days ago, 10 = 10 days ago, etc.), values = pure numbers (integer or 1 decimal)
+- Flag emoji before country name in "name" field (e.g., "🇺🇸 USA")
 
 All numeric values must be pure numbers — no $, %, –, to, ~, USD, etc.
 
-Also add one short FAMILY SAFETY NOTE (1–2 sentences) for ordinary people (food/fuel/medicine availability, personal security, stockpiling advice, travel risks, etc.).
+  Also add one short FAMILY SAFETY NOTE (1–2 sentences) for ordinary people based on CURRENT CONDITIONS in that country (food/fuel/medicine availability, personal security, stockpiling advice, travel risks, etc.). Start this note with 2-3 relevant emojis that describe the current situation or tone. Make this specific to the actual situation, not generic advice. Do not print anything if all is fine
 
 SEARCH FOR & INCLUDE THESE KEY UPDATES:
-1. New military/diplomatic events (Iran–Israel–USA, Red Sea, Hormuz, Taiwan, Ukraine, Russia–NATO)
-2. Current oil, gas, diesel prices + short impact on households
-3. Latest central bank decisions & implications for loans/savings
-4. Major stock indices + VIX
-5. Status of key chokepoints (Hormuz, Suez, Panama, Malacca, Bab-el-Mandeb)
-6. Civil unrest, riots, internet blackouts, curfews, martial law reports
-7. Gold price
-8. Bank runs, ATM limits, capital controls, payment failures
+1. Include up to 15 most recent news titles from the last 24 hours only. Each title must be descriptive (more than 3 words) and ordered chronologically (newest first). Before news title add one emoji that shows it is positive neutral or negative news (🟢 for positive, 🟡 for neutral, 🔴 for negative). After the sentiment emoji, add country flag emojis for countries mentioned in or affected by the news. Add 2-3 relevant emojis at the end of each news title that describe the current situation or tone of the news.
+2. New military/diplomatic events (Iran–Israel–USA, Red Sea, Hormuz, Taiwan, Ukraine, Russia–NATO)
+3. Current oil, gas, diesel prices + short impact on households
+4. Latest central bank decisions & implications for loans/savings
+5. Major stock indices + VIX
+6. Status of key chokepoints (Hormuz, Suez, Panama, Malacca, Bab-el-Mandeb). For "most_critical_shipping_chokepoint_status", start with 2-3 relevant emojis.
+7. Civil unrest, riots, internet blackouts, curfews, martial law reports
+8. Gold price
+9. Bank runs, ATM limits, capital controls, payment failures
 
 GLOBAL SYSTEMIC SHOCK PROBABILITY (catastrophic cascade worse than 2008 ×10):
-Update current range and explain change.
-List 3–5 most critical triggers families should monitor.
+Update current range and explain change. Start this explanation with 2-3 relevant emojis.
+List 3–5 most critical triggers families should monitor. Start each trigger with 1-2 relevant emojis.
 
 Then describe THREE SCENARIOS in family-friendly language:
 
@@ -57,7 +58,6 @@ NUMBER RULES:
 - Ranges → separate fields: from / to
 - Probabilities → whole numbers (20, not 20%)
 - Prices & indices → int or 1 decimal (5367.0, 120.5, 24.0)
-- Time-series keys: at least 0,1,5,10 (add more if data available)
 
 TRANSLATIONS — nest as objects for flexibility:
 For every translatable text field, use object with language codes as keys:
@@ -73,132 +73,131 @@ FORMAT AS VALID JSON ONLY. No text outside. Example:
 {
   "last_updated": "{$targetDate}",
   "global_chaos_probability_100_percent": {
-    "probability_from": 25,
-    "probability_to": 40,
+    "probability_from": ??,
+    "probability_to": ??,
     "current_assessment": {
-      "en": "English explanation paragraph",
-      "ru": "Русский абзац объяснения",
-      "uk": "Український абзац пояснення",
-      "de": "Deutscher Erklärungsparagraph",
-      "lv": "Latviešu skaidrojuma rindkopa"
+      "en": "🚨📉 English explanation paragraph. Till 10 sentences",
+      "ru": "🚨📉 Русский абзац объяснения. до 10 предложений",
+      "uk": "🚨📉 Український абзац пояснення. до 10 речень",
+      "de": "🚨📉 Deutscher Erklärungsparagraph. bis zu 10 Sätzen",
+      "lv": "🚨📉 Latviešu skaidrojuma rindkopa. līdz 10 teikumiem"
     },
+    "last_updated_news_titles": {
+      {
+          "en": [
+            "🔴 🇺🇸 🇨🇳 Detailed last 24h news headline with context (>3 words) 🗞️🔥🚨",
+            "🟡 🇮🇱  Another recent last 24h headline, newest first 📉🔥🌿",
+            "..."
+          ],
+          "ru": [
+            "🔴 🇺🇸 🇨🇳 Подробный заголовок новости за последние 24 ч с контекстом (>3 слов) 🗞️🔥🚨",
+            "🟡 🇮🇱  Ещё одна свежая новость за 24 ч, сначала новые 📉🔥🌿",
+            "..."
+          ],
+          "uk": [
+            "🔴 🇺🇸 🇨🇳 Детальний заголовок новини за останні 24 год з контекстом (>3 слів) 🗞️🔥🚨",
+            "🟡 🇮🇱  Ще одна свіжа новина за 24 год, спочатку нові 📉🔥🌿",
+            "..."
+          ],
+          "de": [
+            "🔴 🇺🇸 🇨🇳 Ausführlicher Titel der News der letzten 24h mit Kontext (>3 Wörter) 🗞️🔥🚨",
+            "🟡 🇮🇱 🇵 Weitere aktuelle 24h-News, neueste zuerst 📉🔥🌿",
+            "..."
+          ],
+          "lv": [
+            "🔴 🇺🇸 🇨🇳 Aprakstošs pēdējo 24h ziņu virsraksts ar kontekstu (>3 vārdi) 🗞️🔥🚨",
+            "🟡 🇮🇱  Vēl viens svaigs 24h virsraksts, jaunākie pirmie 📉🔥🌿",
+            "..."
+          ]
+        },
     "triggers_to_watch": {
-      "en": ["trigger one", "trigger two"],
-      "ru": ["триггер один", "триггер два"],
-      "uk": ["тригер один", "тригер два"],
-      "de": ["Auslöser eins", "Auslöser zwei"],
-      "lv": ["trigeris viens", "trigeris divi"]
+      "en": ["🔥 trigger one", "📉 trigger two", ...],
+      "ru": ["🔥 триггер один", "📉 триггер два", ...],
+      "uk": ["🔥 тригер один", "📉 тригер два", ...],
+      "de": ["🔥 Auslöser eins", "📉 Auslöser zwei", ...],
+      "lv": ["🔥 trigeris viens", "📉 trigeris divi", ...]
     }
   },
   "countries": [
     {
-      "name": "USA",
-      "liquidity": 68,
-      "logistics": 72,
-      "legitimacy": 58,
-      "overall": 66.0,
-      "liquidity_history": {"0": 68, "1": 70, "5": 65, "10": 60},
-      "logistics_history": {"0": 72, "1": 70, "5": 74, "10": 78},
-      "legitimacy_history": {"0": 58, "1": 57, "5": 62, "10": 68},
-      "overall_history": {"0": 66.0, "1": 65.7, "5": 67.0, "10": 68.7},
+      "name": "🇺🇸 USA",
+      "liquidity": ??,
+      "logistics": ??,
+      "legitimacy": ??,
+      "overall": ??,
       "family_safety_note": {
-        "en": "English short note for worried families about shortages/security",
-        "ru": "Русская короткая заметка для семей о дефиците/безопасности",
-        "uk": "Українська коротка нотатка для сімей про дефіцит/безпеку",
-        "de": "Deutsche kurze Notiz für besorgte Familien zu Engpässen/Sicherheit",
-        "lv": "Latviešu īsa piezīme satrauktajām ģimenēm par trūkumiem/drošību"
+        "en": "⛽ Specific current advice based on actual conditions",
+        "ru": "⛽ Конкретный совет на основе текущей ситуации",
+        "uk": "⛽ Конкретна порада на основі поточної ситуації",
+        "de": "⛽ Spezifischer aktueller Rat basierend auf tatsächlichen Bedingungen",
+        "lv": "⛽ Konkrēti padomi, pamatojoties uz faktiskajiem apstākļiem"
       }
     },
     {
-      "name": "Germany",
-      "liquidity": 55,
-      "logistics": 65,
-      "legitimacy": 60,
-      "overall": 60.0,
-      "liquidity_history": {"0": 55, "1": 56, "5": 52, "10": 50},
-      "logistics_history": {"0": 65, "1": 64, "5": 68, "10": 70},
-      "legitimacy_history": {"0": 60, "1": 62, "5": 58, "10": 55},
-      "overall_history": {"0": 60.0, "1": 60.7, "5": 59.3, "10": 58.3},
+      "name": "🇩🇪 Germany",
+      "liquidity": ??,
+      "logistics": ??,
+      "legitimacy": ??,
+      "overall": ??,
       "family_safety_note": {
-        "en": "English note for German families",
-        "ru": "Заметка для немецких семей",
-        "uk": "Нотатка для німецьких сімей",
-        "de": "Notiz für deutsche Familien",
-        "lv": "Piezīme vācu ģimenēm"
-      }
-    },
-    {
-      "name": "Latvia",
-      "liquidity": 48,
-      "logistics": 55,
-      "legitimacy": 45,
-      "overall": 49.3,
-      "liquidity_history": {"0": 48, "1": 50, "5": 45, "10": 42},
-      "logistics_history": {"0": 55, "1": 53, "5": 58, "10": 60},
-      "legitimacy_history": {"0": 45, "1": 47, "5": 42, "10": 40},
-      "overall_history": {"0": 49.3, "1": 50.0, "5": 48.3, "10": 47.3},
-      "family_safety_note": {
-        "en": "English note for Latvian families near eastern border",
-        "ru": "Заметка для латвийских семей у восточной границы",
-        "uk": "Нотатка для латвійських сімей біля східного кордону",
-        "de": "Notiz für lettische Familien nahe der Ostgrenze",
-        "lv": "Piezīme Latvijas ģimenēm pie austrumu robežas"
+        "en": "🌿 Specific current advice based on actual conditions or nothing like 'everything is fine - chill'",
+        "ru": "🌿 Конкретный совет на основе текущей ситуации или ничего, как 'всё хорошо - расслабьтесь'",
+        "uk": "🌿 Конкретна порада на основі поточної ситуації або нічого, як 'все добре - розслабтесь'",
+        "de": "🌿 Spezifischer aktueller Rat basierend auf tatsächlichen Bedingungen oder nichts wie 'alles ist gut - chill'",
+        "lv": "🌿 Konkrēti padomi, pamatojoties uz faktiskajiem apstākļiem vai nekas, kā 'visi ir labi - chill'"
       }
     }
-    // ... remaining 19 countries with the same structure (including Ukraine)
+    // ... remaining 20 countries with the same structure (including Ukraine, Latvia, etc.)
   ],
   "scenarios": [
     {
       "name": "optimistic",
       "description": {
-        "en": "English hopeful path + family advice",
-        "ru": "Русский оптимистичный сценарий + совет семьям",
-        "uk": "Український оптимістичний сценарій + поради сім'ям",
-        "de": "Deutscher hoffnungsvoller Pfad + Familienrat",
-        "lv": "Latviešu cerību pilnais ceļš + ģimenes padomi"
+        "en": "English hopeful path",
+        "ru": "Русский оптимистичный сценарий",
+        "uk": "Український оптимістичний сценарій",
+        "de": "Deutscher hoffnungsvoller Pfad",
+        "lv": "Latviešu cerību pilnais ceļš"
       },
-      "when_visible": "2026-12",
-      "probability_percent": 15
+      "when_visible": "20??-??",
+      "probability_percent": ??
     },
     {
       "name": "realistic",
       "description": {
-        "en": "English likely path + 3–5 steps",
-        "ru": "Русский реалистичный путь + практические шаги",
-        "uk": "Український реалістичний шлях + 3–5 практичних кроків",
-        "de": "Deutscher wahrscheinlicher Weg + 3–5 Schritte",
-        "lv": "Latviešu ticamais ceļš + 3–5 praktiski soļi"
+        "en": "English likely path",
+        "ru": "Русский реалистичный путь",
+        "uk": "Український реалістичний шлях",
+        "de": "Deutscher wahrscheinlicher Weg",
+        "lv": "Latviešu ticamais ceļš"
       },
-      "when_visible": "2026-08",
-      "probability_percent": 60
+      "when_visible": "20??-??",
+      "probability_percent": ??
     },
     {
       "name": "pessimistic_100_chaos",
       "description": {
-        "en": "English cascade details + urgent list",
-        "ru": "Русский детальный каскад + список срочной подготовки",
-        "uk": "Український детальний каскад + список термінової підготовки",
-        "de": "Deutscher Kaskadendetails + dringende Liste",
-        "lv": "Latviešu kaskādes detaļas + steidzama sagatavošanās saraksts"
+        "en": "English cascade details",
+        "ru": "Русский детальный каскад",
+        "uk": "Український детальний каскад",
+        "de": "Deutscher Kaskadendetails",
+        "lv": "Latviešu kaskādes detaļas"
       },
-      "earliest_date": "2026-04",
-      "probability_percent": 25
+      "earliest_date": "20??-??",
+      "probability_percent": ??
     }
   ],
   "key_indicators_today": {
-    "gold_price": 5320.0,
-    "brent_crude": 80.5,
-    "vix_fear_index": 21.4,
-    "global_economic_policy_uncertainty_index": 382,
-    "gold_price_history": {"0": 5320.0, "1": 5300.0, "5": 5250.0, "10": 5100.0},
-    "brent_crude_history": {"0": 80.5, "1": 78.0, "5": 75.0, "10": 70.0},
-    "vix_history": {"0": 21.4, "1": 20.0, "5": 18.5, "10": 16.0},
+    "gold_price": ????.??,
+    "brent_crude": ????.??,
+    "vix_fear_index": ???.?,
+    "global_economic_policy_uncertainty_index": ???,
     "most_critical_shipping_chokepoint_status": {
-      "en": "Strait of Hormuz effectively closed for commercial traffic due to threats",
-      "ru": "Ормузский пролив фактически закрыт для коммерческого трафика из-за угроз",
-      "uk": "Ормузька протока фактично закрита для комерційного трафіку через загрози",
-      "de": " Straße von Hormus effektiv für kommerziellen Verkehr wegen Bedrohungen geschlossen",
-      "lv": "Hormuza šaurums faktiski slēgts komerciālajam satiksmei draudu dēļ"
+      "en": "⛽ Nothing or few sentences describing current status based on actual conditions",
+      "ru": "⛽ Ничего или несколько предложений о текущем статусе на основе фактических условий",
+      "uk": "⛽ Нічого або кілька речень про поточний статус на основі фактичних умов",
+      "de": "⛽ Nichts oder einige Aussagen über den aktuellen Status basierend auf tatsächlichen Bedingungen",
+      "lv": "⛽ Neviena vai daži teikumi par pašreizējo statusu, pamatojoties uz faktiskajiem apstākļiem"
     }
   }
 }

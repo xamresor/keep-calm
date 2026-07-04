@@ -14,6 +14,7 @@ class Snapshot extends Model
         'global_chaos',
         'key_indicators',
         'shipping_chokepoint',
+        'last_updated_news_titles',
     ];
 
     protected $casts = [
@@ -21,6 +22,7 @@ class Snapshot extends Model
         'global_chaos' => 'array',
         'key_indicators' => 'array',
         'shipping_chokepoint' => 'array',
+        'last_updated_news_titles' => 'array',
     ];
 
     public function countries(): HasMany
