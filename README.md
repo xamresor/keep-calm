@@ -36,3 +36,8 @@ Schedule `php artisan dashboard:ingest` (daily) to keep the board fresh.
 ## License
 
 Personal project by Romans Sereda.
+## License
+
+[PolyForm Noncommercial License 1.0.0](LICENSE.md) — free for any **noncommercial** use (personal, research, education, hobbies); **commercial use is not permitted**.
+
+Required Notice: Copyright 2026 Romans Sereda (https://romans.sereda.lv)
