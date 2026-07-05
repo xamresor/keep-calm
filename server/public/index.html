@@ -883,8 +883,16 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="/sereda-header.css">
+  <style>body{padding-top:var(--shdr-h,54px)}</style>
 </head>
 <body>
+<nav class="shdr" aria-label="sereda.lv"><div class="shdr-in">
+  <a class="shdr-brand" href="https://sereda.lv/"><span class="shdr-orb"></span>keep-calm.sereda.lv</a>
+  <div class="shdr-right">
+    <div class="shdr-langs" id="sereda-langs"><a data-lang="en">EN</a><a data-lang="lv">LV</a><a data-lang="ru">RU</a></div>
+  </div>
+</div></nav>
   <div class="container">
     <header class="header-row" id="header-row">
       <div class="header-left">
@@ -1792,5 +1800,6 @@
       })
       .catch(err => showError(err.message));
   </script>
+<script src="/sereda-header.js" defer></script>
 </body>
 </html>
