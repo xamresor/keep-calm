@@ -26,7 +26,7 @@ class GeminiDataProvider implements DashboardDataProviderInterface
     /**
      * @inheritDoc
      */
-    public function fetch(string $when = 'now'): array
+    public function fetch(string $when = 'now', array $context = []): array
     {
         $url = sprintf(
             self::ENDPOINT_TEMPLATE,
@@ -38,7 +38,7 @@ class GeminiDataProvider implements DashboardDataProviderInterface
             'contents' => [
                 [
                     'role' => 'user',
-                    'parts' => [['text' => Prompts::dashboardPrompt($when)]],
+                    'parts' => [['text' => Prompts::dashboardPrompt($when, $context)]],
                 ],
             ],
             'generationConfig' => [

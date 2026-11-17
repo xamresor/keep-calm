@@ -15,7 +15,7 @@ class FileDataProvider implements DashboardDataProviderInterface
     /**
      * @inheritDoc
      */
-    public function fetch(string $when = 'now'): array
+    public function fetch(string $when = 'now', array $context = []): array
     {
         if (!is_readable($this->path)) {
             throw new RuntimeException("Dashboard file not readable: {$this->path}");

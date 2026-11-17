@@ -40,7 +40,10 @@ class DashboardParser implements DashboardParserInterface
                 'liquidity' => (int) ($c['liquidity'] ?? 0),
                 'logistics' => (int) ($c['logistics'] ?? 0),
                 'legitimacy' => (int) ($c['legitimacy'] ?? 0),
-                'overall' => (float) ($c['overall'] ?? 0),
+                // The average is arithmetic, so it is computed here, not asked from the model.
+                'overall' => round((
+                    (int) ($c['liquidity'] ?? 0) + (int) ($c['logistics'] ?? 0) + (int) ($c['legitimacy'] ?? 0)
+                ) / 3, 1),
                 'family_safety_note' => $c['family_safety_note'] ?? [],
             ];
         }

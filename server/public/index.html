@@ -354,7 +354,7 @@
     .indicator-trend.down { color: var(--success); }
 
     .indicator-card .chart-wrap {
-      height: 72px;
+      height: 110px;
       margin-top: 0.6rem;
     }
 
@@ -494,7 +494,7 @@
     }
 
     .country-bar-item .chart-wrap {
-      height: 50px;
+      height: 70px;
       margin-top: 0.35rem;
     }
 
@@ -552,7 +552,7 @@
     }
 
     .country-card .chart-wrap {
-      height: 70px;
+      height: 90px;
       margin: 0.5rem 0 0;
     }
 
@@ -1211,8 +1211,22 @@
       return `rgb(${r}, ${g}, ${b})`;
     }
 
+    // A series from the API is a list of [date, value] pairs, oldest first.
+    function shortDate(iso, monthly) {
+      const [y, m, d] = String(iso).split('-');
+      return monthly ? `${m}.${String(y).slice(2)}` : `${d}.${m}`;
+    }
+
     function historyToSeries(history) {
       if (!history || typeof history !== 'object') return { labels: [], values: [] };
+      if (Array.isArray(history)) {
+        const points = history.filter(p => Array.isArray(p) && p[1] != null);
+        const monthly = points.length > 1 && points.every(p => String(p[0]).endsWith('-01'));
+        return {
+          labels: points.map(p => shortDate(p[0], monthly)),
+          values: points.map(p => Number(p[1])),
+        };
+      }
       const entries = Object.entries(history)
         .filter(([k]) => /^\d+$/.test(k))
         .map(([k, v]) => [parseInt(k, 10), Number(v)]);
@@ -1242,6 +1256,14 @@
       const { labels, values } = historyToSeries(history);
       if (values.length === 0) return null;
 
+      // Scores live on 0-100, but a full axis flattens every line. Zoom to the data with a margin.
+      const lo = Math.min(...values), hi = Math.max(...values);
+      const yMin = isPercentLike ? Math.max(0, Math.floor((lo - 8) / 5) * 5) : undefined;
+      const yMax = isPercentLike ? Math.min(100, Math.ceil((hi + 8) / 5) * 5) : undefined;
+      const compact = (val) => Math.abs(val) >= 1000
+        ? (val / 1000).toLocaleString(undefined, { maximumFractionDigits: 1 }) + 'k'
+        : val.toLocaleString();
+
       return new Chart(ctx, {
         type: 'line',
         data: {
@@ -1257,9 +1279,9 @@
               return createGradient(chart.ctx, chart.chartArea, false);
             },
             fill: true,
-            tension: 0.3,
-            borderWidth: 2,
-            pointRadius: values.length > 10 ? 1 : 3,
+            tension: values.length > 40 ? 0.15 : 0.3,
+            borderWidth: values.length > 40 ? 1.5 : 2,
+            pointRadius: values.length > 40 ? 0 : (values.length > 10 ? 1 : 3),
             pointHoverRadius: 5,
             pointBackgroundColor: (ctx) => {
               const idx = ctx.dataIndex;
@@ -1306,14 +1328,16 @@
               },
             },
             y: {
-              min: isPercentLike ? 0 : undefined,
-              max: isPercentLike ? 100 : undefined,
+              // The mono font can load after the first measure; keep room for the widest tick.
+              afterFit: (axis) => { axis.width = Math.max(axis.width, 38); },
+              min: yMin,
+              max: yMax,
               grid: { color: 'rgba(255,255,255,0.06)', drawBorder: false },
               ticks: { 
                 color: '#71717a', 
                 font: { size: 9, family: 'JetBrains Mono' },
                 maxTicksLimit: 4,
-                callback: (val) => isPercentLike ? val + '%' : val.toLocaleString()
+                callback: (val) => isPercentLike ? val : compact(val)
               },
             },
           },
@@ -1325,6 +1349,15 @@
 
     function trendFromHistory(history) {
       if (!history || typeof history !== 'object') return null;
+      if (Array.isArray(history)) {
+        // Change against the previous point: the previous trading day, or the previous month.
+        if (history.length < 2) return null;
+        const last = Number(history[history.length - 1][1]);
+        const prev = Number(history[history.length - 2][1]);
+        if (!prev) return null;
+        const change = ((last - prev) / prev) * 100;
+        return { pct: change, up: change >= 0 };
+      }
       const cur = history['0'] != null ? Number(history['0']) : null;
       const keys = Object.keys(history).filter(k => /^\d+$/.test(k)).map(Number).sort((a, b) => a - b);
       const oldestKey = keys.find(k => k > 0);
@@ -1340,7 +1373,7 @@
         { key: 'gold_price', label: ui().indicators.gold, historyKey: 'gold_price_history', prefix: '$' },
         { key: 'brent_crude', label: ui().indicators.brent, historyKey: 'brent_crude_history', prefix: '$' },
         { key: 'vix_fear_index', label: ui().indicators.vix, historyKey: 'vix_history', prefix: '' },
-        { key: 'global_economic_policy_uncertainty_index', label: ui().indicators.policy, historyKey: null, prefix: '' },
+        { key: 'global_economic_policy_uncertainty_index', label: ui().indicators.policy, historyKey: 'global_economic_policy_uncertainty_index_history', prefix: '' },
       ];
       let html = `<h2 class="section-title">${withIcon(ui().sections.keyIndicators, 'keyIndicators')}</h2><div class="indicators-grid">`;
       items.forEach((item, i) => {
@@ -1349,12 +1382,15 @@
         const trend = trendFromHistory(history);
         const valueStr = value != null ? (typeof value === 'number' && value > 100 ? value.toLocaleString() : value) : '—';
         const id = 'chart-indicator-' + i;
+        const lastPoint = Array.isArray(history) && history.length ? history[history.length - 1] : null;
+        const lagging = lastPoint && String(lastPoint[0]).endsWith('-01') && history.every(p => String(p[0]).endsWith('-01'));
+        const asOf = lagging ? ` · ${shortDate(lastPoint[0], true)}` : '';
         const trendHtml = trend != null
           ? `<span class="indicator-trend ${trend.up ? 'up' : 'down'}">${trend.up ? '▲' : '▼'} ${Math.abs(trend.pct).toFixed(1)}%</span>`
           : '';
         html += `
           <div class="indicator-card">
-            <div class="label">${item.label}</div>
+            <div class="label">${item.label}${asOf}</div>
             <div class="value-row">
               <span class="value">${item.prefix}${valueStr}</span>
               ${trendHtml}
@@ -1728,6 +1764,7 @@
         { key: 'gold_price_history', label: 'Gold', isPercent: false },
         { key: 'brent_crude_history', label: 'Brent', isPercent: false },
         { key: 'vix_history', label: 'VIX', isPercent: false },
+        { key: 'global_economic_policy_uncertainty_index_history', label: 'GEPU', isPercent: false },
       ];
       indicatorItems.forEach((item, i) => {
         const hist = indicators[item.key];
@@ -1740,19 +1777,19 @@
       const list = countries.filter(c => c.name && !c.name.includes('Duplicate'));
       list.forEach((c, i) => {
         if (c.overall_history && Object.keys(c.overall_history).length) {
-          const chart = createMiniChart('chart-country-overall-' + i, c.overall_history, 'Overall', true);
+          const chart = createMiniChart('chart-country-overall-' + i, c.overall_history, 'Overall, 7d avg', true);
           if (chart) chartInstances.push(chart);
         }
         if (c.liquidity_history && Object.keys(c.liquidity_history).length) {
-          const chart = createMiniChart('chart-country-liq-' + i, c.liquidity_history, 'Liquidity', true);
+          const chart = createMiniChart('chart-country-liq-' + i, c.liquidity_history, 'Liquidity, 7d avg', true);
           if (chart) chartInstances.push(chart);
         }
         if (c.logistics_history && Object.keys(c.logistics_history).length) {
-          const chart = createMiniChart('chart-country-log-' + i, c.logistics_history, 'Logistics', true);
+          const chart = createMiniChart('chart-country-log-' + i, c.logistics_history, 'Logistics, 7d avg', true);
           if (chart) chartInstances.push(chart);
         }
         if (c.legitimacy_history && Object.keys(c.legitimacy_history).length) {
-          const chart = createMiniChart('chart-country-leg-' + i, c.legitimacy_history, 'Legitimacy', true);
+          const chart = createMiniChart('chart-country-leg-' + i, c.legitimacy_history, 'Legitimacy, 7d avg', true);
           if (chart) chartInstances.push(chart);
         }
       });

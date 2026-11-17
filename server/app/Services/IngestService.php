@@ -7,7 +7,8 @@ use App\Contracts\DashboardDataProviderInterface;
 use App\Contracts\DashboardParserInterface;
 use App\Contracts\IngestServiceInterface;
 use App\Contracts\DashboardRepositoryInterface;
-use App\Models\Snapshot;
+use App\Services\News\NewsFeed;
+use App\Services\Prices\PriceFeed;
 
 class IngestService implements IngestServiceInterface
 {
@@ -16,6 +17,9 @@ class IngestService implements IngestServiceInterface
         private readonly DashboardParserInterface $parser,
         private readonly DashboardRepositoryInterface $repository,
         private readonly DashboardCacheInterface $cache,
+        private readonly PriceFeed $prices,
+        private readonly DashboardPresenter $presenter,
+        private readonly NewsFeed $news,
     ) {
     }
 
@@ -26,12 +30,32 @@ class IngestService implements IngestServiceInterface
     {
         try {
             $targetDate = $this->resolveTargetDate($when);
-            $raw = $this->provider->fetch($when);
+
+            // Prices come from the market feed, never from the model: it invents them.
+            // A failed feed keeps the last stored real values.
+            $this->prices->refresh();
+            $real = $this->prices->valuesOn($targetDate);
+
+            $previous = $this->repository->getLatest();
+            $raw = $this->provider->fetch($when, [
+                'market' => $real,
+                // Real headlines, only for a run about today: feeds do not go back in time.
+                'headlines' => $targetDate === gmdate('Y-m-d') ? $this->headlines() : [],
+                // The model has no memory of yesterday. Without a starting point the scores jump by ±10 a day.
+                'baseline_countries' => $this->presenter->countryBaseline($targetDate),
+                'baseline_chaos' => $previous ? array_intersect_key(
+                    $previous->global_chaos ?? [],
+                    ['probability_from' => 1, 'probability_to' => 1],
+                ) : [],
+            ]);
             $parsed = $this->parser->parse($raw);
             $parsed['snapshot']['last_updated'] = $targetDate;
+            $parsed['snapshot']['key_indicators'] = array_merge(
+                array_fill_keys(PriceFeed::seriesKeys(), null),
+                $real,
+            );
             $snapshot = $this->repository->store($parsed);
-            $forCache = $this->snapshotToApiShape($snapshot);
-            $this->cache->put($forCache);
+            $this->cache->put($this->presenter->present($snapshot));
 
             return [
                 'success' => true,
@@ -47,6 +71,18 @@ class IngestService implements IngestServiceInterface
         }
     }
 
+    /**
+     * @return array<int, array{source: string, title: string, time: string}>
+     */
+    private function headlines(): array
+    {
+        try {
+            return $this->news->refresh();
+        } catch (\Throwable) {
+            return [];
+        }
+    }
+
     private function resolveTargetDate(string $when): string
     {
         try {
@@ -54,44 +90,5 @@ class IngestService implements IngestServiceInterface
         } catch (\Throwable $e) {
             throw new \InvalidArgumentException("Invalid date expression '{$when}'. Use values like 'now', '-1 day', '-10 days'.", 0, $e);
         }
-    }
-
-    /**
-     * Convert Snapshot model to frontend JSON shape.
-     *
-     * @return array<string, mixed>
-     */
-    private function snapshotToApiShape(Snapshot $snapshot): array
-    {
-        $chaos = $snapshot->global_chaos ?? [];
-
-        $countries = $snapshot->countries->map(fn ($c) => [
-            'name' => $c->name,
-            'liquidity' => $c->liquidity,
-            'logistics' => $c->logistics,
-            'legitimacy' => $c->legitimacy,
-            'overall' => $c->overall,
-            'family_safety_note' => $c->family_safety_note ?? [],
-        ])->toArray();
-
-        $scenarios = $snapshot->scenarios->map(fn ($s) => [
-            'name' => $s->name,
-            'description' => $s->description ?? [],
-            'when_visible' => $s->when_visible,
-            'earliest_date' => $s->earliest_date,
-            'probability_percent' => $s->probability_percent,
-        ])->toArray();
-
-        $indicators = $snapshot->key_indicators ?? [];
-        $indicators['most_critical_shipping_chokepoint_status'] = $snapshot->shipping_chokepoint;
-
-        return [
-            'last_updated' => $snapshot->last_updated->format('Y-m-d'),
-            'global_chaos_probability_100_percent' => $chaos,
-            'last_updated_news_titles' => $snapshot->last_updated_news_titles ?? [],
-            'countries' => $countries,
-            'scenarios' => $scenarios,
-            'key_indicators_today' => $indicators,
-        ];
     }
 }

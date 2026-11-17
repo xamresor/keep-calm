@@ -14,6 +14,19 @@ A scheduled ingest asks **Gemini** for a structured snapshot (global chaos, ~23 
 scenarios), parses and stores it, and the frontend renders it (Chart.js). An optional
 [Massive.com](https://massive.com) integration adds live market indices/stocks/economy/news.
 
+**Prices are real, not generated.** Gold, Brent and VIX are daily closes from the Yahoo Finance chart
+endpoint; the Global Economic Policy Uncertainty index is the monthly `GEPUCURRENT` series from FRED.
+Neither needs an API key. They are stored by day in `price_points`. The daily ingest loads them first,
+gives them to Gemini as facts and stores them in the snapshot, so the model never supplies a price.
+The charts on the page read their history from the database: 180 days of prices, 90 days of country
+scores as a 7-day average (the daily scores jump by ±10).
+
+**News are real, not generated.** The model has no web access. The ingest loads headlines of the last
+36 hours from public RSS feeds (BBC, Al Jazeera, DW, France 24, The Guardian, LSM), stores them with
+links in `news_items` and gives them to the model as the only source of current events. The model
+also gets last week's average country scores as a starting point and must move the countries that the
+headlines touch. Without that starting point the scores were noise; with it and no headlines they froze.
+
 ## Structure
 
 - `server/` — **Lumen** backend + the static dashboard (`public/index.html`, Chart.js and fonts
@@ -33,9 +46,9 @@ php -S 0.0.0.0:8000 -t public
 
 Schedule `php artisan dashboard:ingest` (daily) to keep the board fresh.
 
-## License
-
-Personal project by Romans Sereda.
+Price history: `php artisan prices:ingest --range=1y` loads a year of daily prices. Add
+`--rewrite-snapshots` once on an old database to replace the prices stored in past snapshots with the
+real ones. Planned work is in `ROADMAP.md`.
 
 ## License
 

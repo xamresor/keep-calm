@@ -8,9 +8,12 @@ class Prompts
      * System prompt that instructs Gemini to produce dashboard JSON.
      * Should be customized per deployment.
      */
-    public static function dashboardPrompt(string $when = 'now'): string
+    public static function dashboardPrompt(string $when = 'now', array $context = []): string
     {
         $targetDate = (new \DateTimeImmutable($when))->format('Y-m-d');
+        $marketBlock = self::marketBlock($context['market'] ?? []);
+        $newsRule = self::newsRule($context['headlines'] ?? []);
+        $baselineBlock = self::baselineBlock($context['baseline_countries'] ?? [], $context['baseline_chaos'] ?? []);
 
         return <<<PROMPT
 You are an economic analyst specializing in global risk assessment, but you also speak plainly and caringly to everyday families who are afraid for their loved ones' safety and basic needs in uncertain times.
@@ -19,21 +22,24 @@ Please provide an updated "Global Chaos Index" for {$targetDate}, based on the v
 Set "last_updated" to {$targetDate}.
 
 Use this exact structure.
-
-COUNTRIES TO ANALYZE (exactly 22, no omissions):
+{$marketBlock}
+COUNTRIES TO ANALYZE (exactly 23, no omissions):
 USA, China, Eurozone, Russia, UK, Japan, India, Iran, UAE, Saudi Arabia, Turkey, Brazil, South Africa, South Korea, Australia, New Zealand, Israel, Poland, Latvia, Ukraine, Germany, Egypt, Developing Markets (EM)
 
 FOR EACH COUNTRY PROVIDE:
-- 4 METRICS today (scale 0–100, 100 = maximum chaos/danger):
-  Liquidity, Logistics, Legitimacy, Overall (average)
+- 3 METRICS today (scale 0–100, 100 = maximum chaos/danger): Liquidity, Logistics, Legitimacy
+  ("overall" is computed from them later; you may leave it out)
+  Scale: 0–20 calm, normal life; 20–40 strained, visible stress; 40–60 serious disruption that
+  households feel; 60–80 crisis; 80–100 collapse.
+{$baselineBlock}
 - Flag emoji before country name in "name" field (e.g., "🇺🇸 USA")
 
 All numeric values must be pure numbers — no $, %, –, to, ~, USD, etc.
 
-  Also add one short FAMILY SAFETY NOTE (1–2 sentences) for ordinary people based on CURRENT CONDITIONS in that country (food/fuel/medicine availability, personal security, stockpiling advice, travel risks, etc.). Start this note with 2-3 relevant emojis that describe the current situation or tone. Make this specific to the actual situation, not generic advice. Do not print anything if all is fine
+  Also add one short FAMILY SAFETY NOTE (1–2 sentences) for ordinary people based on CURRENT CONDITIONS in that country (food/fuel/medicine availability, personal security, stockpiling advice, travel risks, etc.). Start this note with 2-3 relevant emojis that describe the current situation or tone. Make this specific to the actual situation, not generic advice. If nothing notable is happening in that country, use an empty string in every language
 
-SEARCH FOR & INCLUDE THESE KEY UPDATES:
-1. Include up to 15 most recent news titles from the last 24 hours only. Each title must be descriptive (more than 3 words) and ordered chronologically (newest first). Before news title add one emoji that shows it is positive neutral or negative news (🟢 for positive, 🟡 for neutral, 🔴 for negative). After the sentiment emoji, add country flag emojis for countries mentioned in or affected by the news. Add 2-3 relevant emojis at the end of each news title that describe the current situation or tone of the news.
+INCLUDE THESE KEY UPDATES:
+1. {$newsRule} Each title must be descriptive (more than 3 words) and ordered chronologically (newest first). Before news title add one emoji that shows it is positive neutral or negative news (🟢 for positive, 🟡 for neutral, 🔴 for negative). After the sentiment emoji, add country flag emojis for countries mentioned in or affected by the news. Add 2-3 relevant emojis at the end of each news title that describe the current situation or tone of the news.
 2. New military/diplomatic events (Iran–Israel–USA, Red Sea, Hormuz, Taiwan, Ukraine, Russia–NATO)
 3. Current oil, gas, diesel prices + short impact on households
 4. Latest central bank decisions & implications for loans/savings
@@ -42,6 +48,7 @@ SEARCH FOR & INCLUDE THESE KEY UPDATES:
 7. Civil unrest, riots, internet blackouts, curfews, martial law reports
 8. Gold price
 9. Bank runs, ATM limits, capital controls, payment failures
+For points 2–9 use only the headlines and the market data given above. Where they say nothing about a point, do not invent a status, a decision or a number: describe it as unchanged or leave it out.
 
 GLOBAL SYSTEMIC SHOCK PROBABILITY (catastrophic cascade worse than 2008 ×10):
 Update current range and explain change. Start this explanation with 2-3 relevant emojis.
@@ -83,7 +90,6 @@ FORMAT AS VALID JSON ONLY. No text outside. Example:
       "lv": "🚨📉 Latviešu skaidrojuma rindkopa. līdz 10 teikumiem"
     },
     "last_updated_news_titles": {
-      {
           "en": [
             "🔴 🇺🇸 🇨🇳 Detailed last 24h news headline with context (>3 words) 🗞️🔥🚨",
             "🟡 🇮🇱  Another recent last 24h headline, newest first 📉🔥🌿",
@@ -109,7 +115,7 @@ FORMAT AS VALID JSON ONLY. No text outside. Example:
             "🟡 🇮🇱  Vēl viens svaigs 24h virsraksts, jaunākie pirmie 📉🔥🌿",
             "..."
           ]
-        },
+    },
     "triggers_to_watch": {
       "en": ["🔥 trigger one", "📉 trigger two", ...],
       "ru": ["🔥 триггер один", "📉 триггер два", ...],
@@ -202,5 +208,90 @@ FORMAT AS VALID JSON ONLY. No text outside. Example:
   }
 }
 PROMPT;
+    }
+
+    /**
+     * The model has no web access. News titles may only restate headlines we loaded for it.
+     *
+     * @param array<int, array{source: string, title: string, time: string}> $headlines
+     */
+    private static function newsRule(array $headlines): string
+    {
+        if ($headlines === []) {
+            return 'No verified headlines are available today. Return an empty list of news titles in every '
+                . 'language and do not describe any event as recent news.';
+        }
+
+        $lines = array_map(fn ($h) => "- [{$h['time']}] {$h['source']}: {$h['title']}", $headlines);
+
+        return "You have no web access. Below are REAL HEADLINES of the last day, loaded for you. They are the "
+            . "only source of current events: never mention an event that is not in this list. Pick up to 15 that "
+            . "matter most for the safety and money of ordinary families, restate each in your own words, and name "
+            . "the source in brackets before the closing emojis, e.g. (BBC). Let these events decide which country scores move, "
+            . "what the assessment says and which triggers you list.\n"
+            . implode("\n", $lines) . "\n";
+    }
+
+    /**
+     * Last week's average scores and the previous chaos range: the starting point for the new day.
+     *
+     * @param array<string, array<string, float>> $countries
+     * @param array<string, mixed> $chaos
+     */
+    private static function baselineBlock(array $countries, array $chaos): string
+    {
+        if ($countries === []) {
+            return '';
+        }
+
+        $lines = [];
+        foreach ($countries as $name => $s) {
+            $lines[] = sprintf(
+                '  %s: liquidity %s, logistics %s, legitimacy %s',
+                $name,
+                round($s['liquidity']),
+                round($s['logistics']),
+                round($s['legitimacy']),
+            );
+        }
+        $range = isset($chaos['probability_from'], $chaos['probability_to'])
+            ? "\n  Previous global shock probability range: {$chaos['probability_from']}–{$chaos['probability_to']}."
+            : '';
+
+        return "\nSTARTING POINT (average of the last 7 days). These numbers are where each country stood, "
+            . "not the answer. For every country that today's headlines touch, decide metric by metric whether "
+            . "the event makes things worse or better and move the score by 1–10 points; such a country must not "
+            . "keep exactly the same three numbers. A country the headlines do not touch keeps its numbers. "
+            . "Apply the same rule to the global range: move it when today's events are heavier or lighter than "
+            . "the week before.\n"
+            . implode("\n", $lines) . $range . "\n";
+    }
+
+    /**
+     * Real market values the model must use instead of recalling prices from memory.
+     *
+     * @param array<string, float> $facts
+     */
+    private static function marketBlock(array $facts): string
+    {
+        $labels = [
+            'gold_price' => 'Gold, USD per ounce',
+            'brent_crude' => 'Brent crude, USD per barrel',
+            'vix_fear_index' => 'VIX',
+            'global_economic_policy_uncertainty_index' => 'Global Economic Policy Uncertainty index (latest monthly value)',
+        ];
+        $lines = [];
+        foreach ($labels as $key => $label) {
+            if (isset($facts[$key])) {
+                $lines[] = "- {$label}: {$facts[$key]}";
+            }
+        }
+        if ($lines === []) {
+            return '';
+        }
+
+        return "\nREAL MARKET DATA (measured, not an estimate). Use exactly these values in "
+            . "\"key_indicators_today\" and whenever a text mentions these prices. Never state a different level:\n"
+            . implode("\n", $lines) . "\n";
     }
 }

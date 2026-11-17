@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         Commands\IngestDashboardCommand::class,
         Commands\DbInitCommand::class,
         Commands\IngestMassiveDataCommand::class,
+        Commands\IngestPricesCommand::class,
     ];
 
     /**
